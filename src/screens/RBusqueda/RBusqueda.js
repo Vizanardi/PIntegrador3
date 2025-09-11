@@ -18,6 +18,6 @@ function RBusqueda(props) {
   );
 }
 
-TERMINARRRRRRRRRRRRR
+//TERMINAR
 
 export default RBusqueda;

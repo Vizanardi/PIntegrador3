@@ -10,7 +10,9 @@ function Home(){
     return(
         <React.Fragment>
             <Navbar items={items}/>
-            <Footer />
+            <Movies/>
+            <Series/>
+            <Footer/>
         </React.Fragment>
     )
 }

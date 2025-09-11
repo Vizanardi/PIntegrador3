@@ -5,8 +5,9 @@ import Movies from "./screens/Movies/Movies";
 import UnaMovie from "./screens/UnaMovie/UnaMovie";
 import Series from "./screens/Series/Series";
 import UnaSerie from "./screens/UnaSerie/UnaSerie";
+import RBusqueda from "./screens/RBusqueda/RBusqueda"
 
-import {Route, Switch} from "react-router-dom/cjs/react-router-dom.min";
+import {Route, Switch} from "react-router-dom";
 
 function App() {
   return (
