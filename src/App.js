@@ -18,6 +18,7 @@ function App() {
           <Route path="/Series/id/:id" component={UnaSerie} />
           <Route path="/Series" component={Series} />
           <Route path="/Favorites" component={Favorites} />
+          <Route path="/RBusqueda/:name" component={RBusqueda}/>
           <Route path="" component={Error} />
       </Switch>
     </div>
