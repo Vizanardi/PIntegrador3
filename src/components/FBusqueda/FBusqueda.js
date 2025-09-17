@@ -26,8 +26,7 @@ class FBusqueda extends Component {
                         <input type="text" placeholder='Buscar...' onChange={(event) => this.controlarCambios(event)} value={this.state.busqueda}/>
                     </form>
                 </section>       
-        )}
-TERMINARRRRRRRRRRRRRRRRRRRRRRRR     
+        )}   
 };
 
 export default withRouter(FBusqueda);
