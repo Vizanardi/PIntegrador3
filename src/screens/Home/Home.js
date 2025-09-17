@@ -5,7 +5,7 @@ import Footer from '../../components/Footer/Footer';
 import Movies from '../../components/Movies/Movies';
 import Series from '../../components/Series/Series';
 
-let items = [{pagina:"Home", direccion:"/"}, {pagina:"Movies", direccion:"/MoviesG"}, {pagina: "Series", direccion:"/Series"}, {pagina: "Favoritas", direccion:"/Favorites"}];
+let items = [{pagina:"Home", direccion:"/"}, {pagina:"Movies", direccion:"/MoviesG"}, {pagina: "Series", direccion:"/SeriesG"}, {pagina: "Favoritas", direccion:"/Favorites"}];
 
 class Home extends Component{
   constructor(props) {
