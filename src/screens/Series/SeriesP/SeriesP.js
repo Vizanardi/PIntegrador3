@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Navbar from '../../../components/Navbar/Navbar';
-import Footer from '../../../components/Footer/Footer';
-import Movies from '../../../components/Movies/Movies';
+import Navbar from '../../components/Navbar/Navbar';
+import Footer from '../../components/Footer/Footer';
+import Series from '../../components/Series/Series';
 
-let items = [{pagina:"Home", direccion:"/"}, {pagina:"Popular Movies", direccion:"/MoviesP"}, {pagina:"TopRated Movies", direccion:"/MoviesR"}, {pagina:"UpComing Movies", direccion:"/MoviesU"}, {pagina: "Series", direccion:"/Series"}, {pagina: "Favoritas", direccion:"/Favorites"}];
+let items = [{pagina:"Home", direccion:"/"}, {pagina:"Movies", direccion:"/MoviesG"}, {pagina: "Popular Series", direccion:"/SeriesP"}, {pagina: "TopRated Series", direccion:"/SeriesT"}, {pagina: "Favoritas", direccion:"/Favorites"}];
 
-class MoviesP extends Component{
+class SeriesP extends Component{
   constructor(props) {
     super(props);
 
     this.state = {
-      mP: [],
+      sP: [],
     };
   }
 
@@ -24,11 +24,10 @@ class MoviesP extends Component{
     }
   };
 
-  fetch('https://api.themoviedb.org/3/movie/popular?language=en-US&page=1', options)
+  fetch('https://api.themoviedb.org/3/tv/popular?language=en-US&page=1', options)
     .then(res => res.json())
     .then(data => {
-      console.log(data)
-        this.setState({mP: data.results})
+        this.setState({sP: data.results})
     })
     .catch(err => console.error(err));
   }
@@ -38,13 +37,13 @@ class MoviesP extends Component{
     return (
     <React.Fragment>
       <Navbar items={items} />
-      <h3>Peliculas mas populares en Argentina Hoy</h3>
-      <Movies datos={this.state.mP} />
-          <Link to="/MoviesP">Ver mas...</Link>
+      <h3>Series más populares</h3>
+      <Series datos={this.state.sP} />
+          <Link to="/SeriesP">Ver mas...</Link>
       <Footer />
     </React.Fragment>
   );
 }
   }
 
-export default MoviesP;
+export default SeriesP;

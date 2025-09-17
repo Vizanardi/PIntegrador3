@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Navbar from '../../../components/Navbar/Navbar';
-import Footer from '../../../components/Footer/Footer';
-import Movies from '../../../components/Movies/Movies';
+import Navbar from '../../components/Navbar/Navbar';
+import Footer from '../../components/Footer/Footer';
+import Movies from '../../components/Movies/Movies';
 
 let items = [{pagina:"Home", direccion:"/"}, {pagina:"Popular Movies", direccion:"/MoviesP"}, {pagina:"TopRated Movies", direccion:"/MoviesR"}, {pagina:"UpComing Movies", direccion:"/MoviesU"}, {pagina: "Series", direccion:"/Series"}, {pagina: "Favoritas", direccion:"/Favorites"}];
 
-class MoviesP extends Component{
+class MoviesG extends Component{
   constructor(props) {
     super(props);
 
     this.state = {
+      mR: [],
       mP: [],
+      mU: [],
     };
   }
 
@@ -31,6 +33,22 @@ class MoviesP extends Component{
         this.setState({mP: data.results})
     })
     .catch(err => console.error(err));
+    
+  fetch('https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1', options)
+    .then(res => res.json())
+    .then(data => {
+      console.log(data)
+        this.setState({mU: data.results})
+    })
+    .catch(err => console.error(err));
+
+    fetch('https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1', options)
+    .then(res => res.json())
+    .then(data => {
+      console.log(data)
+        this.setState({mR: data.results})
+    })
+    .catch(err => console.error(err));
   }
 
   render() {
@@ -38,13 +56,23 @@ class MoviesP extends Component{
     return (
     <React.Fragment>
       <Navbar items={items} />
+      <h1>Cartelera de Peliculas</h1>
       <h3>Peliculas mas populares en Argentina Hoy</h3>
       <Movies datos={this.state.mP} />
           <Link to="/MoviesP">Ver mas...</Link>
+
+      <h3>Nuestra seleccion de peliculas para ti</h3>
+      <Movies datos={this.state.mR} />
+          <Link to="/MoviesR">Ver mas...</Link>
+
+      <h3>Por venir...</h3>
+      <Movies datos={this.state.mU} />
+          <Link to="/MoviesU">Ver mas...</Link>
+      
       <Footer />
     </React.Fragment>
   );
 }
   }
 
-export default MoviesP;
+export default MoviesG;

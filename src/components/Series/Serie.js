@@ -18,7 +18,33 @@ class Serie extends Component {
       this.setState({verMas: false, textoBotton: "Ver descripcion"})
     }}
 
-    
+    agregarAFavs(){
+      let favs= localStorage.getItem("seriesFavoritas")
+      if(favs === null){
+        let favArray= []
+        favArray.push(this.props.id)
+        let stringFavs = JSON.stringify(favArray)
+        localStorage.setItem("seriesFavoritas", stringFavs)
+      }
+      else{
+        let parciado = JSON.parse(favs)
+        parciado.push(this.props.id)
+        let stringParciado = JSON.stringify(parciado)
+        localStorage.setItem("seriesFavoritas", stringParciado)
+      }
+      this.setState({ enFavs: true})
+    }
+
+    quitarFavs(){
+      let favs= localStorage.getItem("seriesFavoritas")
+      if(favs !== null){
+        let parciado = JSON.parse(favs)
+        parciado.filter(id => id !== this.props.id)
+        let stringParciado = JSON.stringify(parciado)
+        localStorage.setItem("seriesFavoritas", stringParciado)
+        this.setState({enFavs: false})
+      } 
+    } 
 
   render(){
     return (
@@ -28,11 +54,14 @@ class Serie extends Component {
               <h2>{this.props.nombre}</h2>
             </Link>
 
-              <p onClick={() => this.verMas()} className="more">{this.state.textoBotton}</p>
-              
-              {this.state.verMas ? <section>
+            {this.state.verMas ? <section>
                 <p>{this.props.descripcion}</p>
                 </section>:""}  
+
+              <p onClick={() => this.verMas()} className="more">{this.state.textoBotton}</p>
+
+              {this.state.enFavs ? <button onClick={() => this.quitarFavs()} >Quitar de Favoritos</button> : <button onClick={() => this.agregarAFavs()}>Agregar a Favoritos</button>}
+
 
               <Link to={`/Series/id/${this.props.key}`}></Link>
     </article>     
