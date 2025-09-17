@@ -16,7 +16,7 @@ class Home extends Component{
       mP: [],
       mU: [],
       sP: [],
-      sR: []
+      sT: []
     };
   }
 
@@ -31,89 +31,74 @@ class Home extends Component{
 
   fetch('https://api.themoviedb.org/3/movie/popular?language=en-US&page=1', options)
     .then(res => res.json())
-    .then(res => console.log(res))
     .then(data => {
+      console.log(data)
         this.setState({mP: data.results})
     })
     .catch(err => console.error(err));
     
   fetch('https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1', options)
     .then(res => res.json())
-    .then(res => console.log(res))
     .then(data => {
+      console.log(data)
         this.setState({mU: data.results})
     })
     .catch(err => console.error(err));
 
-  fetch('https://api.themoviedb.org/3/movie/movie_id/recommendations?language=en-US&page=1', options)
+    fetch('https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1', options)
     .then(res => res.json())
-    .then(res => console.log(res))
     .then(data => {
+      console.log(data)
         this.setState({mR: data.results})
     })
     .catch(err => console.error(err));
 
   fetch('https://api.themoviedb.org/3/tv/popular?language=en-US&page=1', options)
     .then(res => res.json())
-    .then(res => console.log(res))
     .then(data => {
         this.setState({sP: data.results})
     })
     .catch(err => console.error(err));
 
-  fetch('https://api.themoviedb.org/3/tv/series_id/recommendations?language=en-US&page=1', options)
+  
+  fetch('https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=1', options)
     .then(res => res.json())
-    .then(res => console.log(res))
     .then(data => {
-        this.setState({sR: data.results})
+        this.setState({sT: data.results})
     })
-    .catch(err => console.error(err));
-    }
+    .catch(err => console.error(err));  
+  }
+
+
 
   render() {
+    console.log(this.state.mR)
     return (
     <React.Fragment>
       <Navbar items={items} />
       <h1>Cartelera de Peliculas</h1>
       <h3>Peliculas mas populares en Argentina Hoy</h3>
-      <Movies datos={this.state.mP} 
-          favoritos={this.state.favoritos}
-          enFavoritos = {false}
-          agregarFav={this.agregarFavorito}
-          quitarFav={this.quitarFavorito} />
+      <Movies datos={this.state.mP} />
           <Link to="/MoviesP">Ver mas...</Link>
 
       <h3>Nuestra seleccion de peliculas para ti</h3>
-      <Movies datos={this.state.mR} 
-          favoritos={this.state.favoritos}
-          enFavoritos = {false}
-          agregarFav={this.agregarFavorito}
-          quitarFav={this.quitarFavorito} />
+      <Movies datos={this.state.mR} />
           <Link to="/MoviesR">Ver mas...</Link>
 
-      <h3>Peliculas por venir...</h3>
-      <Movies datos={this.state.mU} 
-          favoritos={this.state.favoritos}
-          enFavoritos = {false}
-          agregarFav={this.agregarFavorito}
-          quitarFav={this.quitarFavorito} />
-          <Link to="/MoviesU">Ver mas...</Link>
+      <h3>Por venir...</h3>
+      <Movies datos={this.state.mU} />
+          <Link to="/MoviesR">Ver mas...</Link>
+    
+      <h1>Cartelera de Series</h1>
+      <h3>Series más populares</h3>
+      <Series datos={this.state.sP} />
+          <Link to="/MoviesR">Ver mas...</Link>
+      
+      <h3>Premiadas</h3>
+      <Series datos={this.state.sT} />
+          <Link to="/MoviesR">Ver mas...</Link>
 
-      <h3>Series mas populares en Argentina Hoy</h3>
-      <Series datos={this.state.sP} 
-          favoritos={this.state.favoritos}
-          enFavoritos = {false}
-          agregarFav={this.agregarFavorito}
-          quitarFav={this.quitarFavorito} />
-          <Link to="/SeriesP">Ver mas...</Link>
-
-      <h3>Nuestra seleccion de series para ti</h3>
-      <Series datos={this.state.sR} 
-          favoritos={this.state.favoritos}
-          enFavoritos = {false}
-          agregarFav={this.agregarFavorito}
-          quitarFav={this.quitarFavorito} />
-          <Link to="/SeriesR">Ver mas...</Link>
+      
       <Footer />
     </React.Fragment>
   );

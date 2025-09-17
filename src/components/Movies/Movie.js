@@ -7,52 +7,66 @@ class Movie extends Component {
          this.state = {
          valor: props.value,
          verMas: false,
-         textoBotton: "Ver más",
-         clase: "hide",
-         favorito: this.props.enFavoritos,
-         textoFav: this.props.enFavoritos ? "Quitar de favoritos" : "Agregar a favoritos"
+         textoBotton: "Ver descripcion",
+         enFavs: false
         }}
 
     verMas(){
     if (this.state.verMas === false){
-      this.setState({verMas: true, textoBotton: "Ver menos", clase: "show"})
+      this.setState({verMas: true, textoBotton: "Ver menos"})
 
     }else{
-      this.setState({verMas: false, textoBotton: "Ver más", clase: "hide"})
+      this.setState({verMas: false, textoBotton: "Ver descripcion"})
     }}
 
-    Favorito(){
-      if (this.state.favorito === false){
-        this.props.agregarFav(this.props.id);
-        this.setState({favorito: true, textoFav: "Quitar de favoritos"})
-      }else{
-        this.props.quitarFav(this.props.id);
-        this.setState({favorito: false, textoFav: "Agregar a favoritos"})
-    }}
+    agregarAFavs(){
+      let favs= localStorage.getItem("moviesFavoritas")
+      if(favs === null){
+        let favArray= []
+        favArray.push(this.props.id)
+        let stringFavs = JSON.stringify(favArray)
+        localStorage.setItem("moviesFavoritas", stringFavs)
+      }
+      else{
+        let parciado = JSON.parse(favs)
+        parciado.push(this.props.id)
+        let stringParciado = JSON.stringify(parciado)
+        localStorage.setItem("moviesFavoritas", stringParciado)
+      }
+      this.setState({ enFavs: true})
+    }
+
+    quitarFavs(){
+      let favs= localStorage.getItem("moviesFavoritas")
+      if(favs !== null){
+        let parciado = JSON.parse(favs)
+        parciado.filter(id => id !== this.props.id)
+        let stringParciado = JSON.stringify(parciado)
+        localStorage.setItem("moviesFavoritas", stringParciado)
+        this.setState({enFavs: false})
+      } 
+    }
+
 
   render(){
     return (
       <article className = "character-card">
-            <Link to={`/rickandmorty/id/${this.props.id}`}>
-              <img src={this.props.imagen} alt={this.props.nombre} />
+            <Link to={`/Movies/id/${this.props.key}`}>
+              <img src={`https://image.tmdb.org/t/p/w500${this.props.imagen}`} alt={this.props.nombre} />
               <h2>{this.props.nombre}</h2>
             </Link>
-              <p>{this.props.status}</p>
-              <p>{this.props.species}</p>
+              
+              {this.state.verMas ? <section>
+                <p>{this.props.descripcion}</p>
+                </section>:""}  
 
               <p onClick={() => this.verMas()} className="more">{this.state.textoBotton}</p>
-              
-              {this.state.verMas ? <section className={`extra ${this.state.clase}`}>
-                <p className={this.state.clase}>Origen: {this.props.originName}</p>
-                <Link to={this.props.originUrl} className={this.state.clase}>
-                  <p className='location'>Location:{this.props.originUrl}</p></Link>
-                </section>:""}  
-                
-              <button onClick={() => this.Favorito(this.props.id)} className="more" >{this.state.textoFav}</button>
-  
-              <p onClick={() => this.props.onDelete(this.props.id)} className='delete'>Borrar</p>
+
+              {this.state.enFavs ? <button onClick={() => this.quitarFavs()} >Quitar de Favoritos</button> : <button onClick={() => this.agregarAFavs()}>Agregar a Favoritos</button>}
+
+              <Link to={`/Movies/id/${this.props.key}`}></Link>
     </article>     
     );
   };
 }
-export default CardRM;
+export default Movie;
