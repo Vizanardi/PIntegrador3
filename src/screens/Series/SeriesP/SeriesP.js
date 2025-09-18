@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Navbar from "../../../components/Navbar/Navbar";
 import Footer from '../../../components/Footer/Footer';
 import Series from '../../../components/Series/Series';
+import Filter from '../../../components/Filter/Filter';
 
 let items = [{pagina:"Home", direccion:"/"}, {pagina:"Movies", direccion:"/MoviesG"}, {pagina: "Popular Series", direccion:"/SeriesP"}, {pagina: "TopRated Series", direccion:"/SeriesT"}, {pagina: "Favoritas", direccion:"/Favorites"}];
 
@@ -12,6 +13,7 @@ class SeriesP extends Component{
 
     this.state = {
       sP: [],
+      arrayBusqueda: [],
     };
   }
 
@@ -32,11 +34,16 @@ class SeriesP extends Component{
     .catch(err => console.error(err));
   }
 
+  filtrarSerie(ser){
+        let serie = this.state.sP.filter(serie => serie.name.toLowerCase().includes(ser))
+        this.setState({arrayBusqueda: serie})
+    }
+
   render() {
-    console.log(this.state.mR)
     return (
     <React.Fragment>
       <Navbar items={items} />
+      <Filter filtrar={(ser) => this.filtrarSerie(ser)}/>
       <h3>Series más populares</h3>
       <Series datos={this.state.sP} />
           <Link to="/SeriesP">Ver mas...</Link>

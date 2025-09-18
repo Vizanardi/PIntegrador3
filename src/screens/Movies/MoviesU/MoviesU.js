@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../../../components/Navbar/Navbar';
 import Footer from '../../../components/Footer/Footer';
-import Movies from "../../../components/Movies/Movies"
+import Movies from "../../../components/Movies/Movies";
+import Filter from '../../../components/Filter/Filter';
 
 let items = [{pagina:"Home", direccion:"/"}, {pagina:"Popular Movies", direccion:"/MoviesP"}, {pagina:"TopRated Movies", direccion:"/MoviesR"}, {pagina:"UpComing Movies", direccion:"/MoviesU"}, {pagina: "Series", direccion:"/SeriesG"}, {pagina: "Favoritas", direccion:"/Favorites"}];
 class MoviesU extends Component{
@@ -11,6 +12,7 @@ class MoviesU extends Component{
 
     this.state = {
       mU: [],
+      arrayBusqueda: [],
     };
   }
 
@@ -32,11 +34,16 @@ class MoviesU extends Component{
     .catch(err => console.error(err));
   }
 
+  filtrarPersonaje(peli){
+        let movie = this.state.mU.filter(movie => movie.title.toLowerCase().includes(peli))
+        this.setState({arrayBusqueda: movie})
+    }
+
   render() {
-    console.log(this.state.mR)
     return (
     <React.Fragment>
       <Navbar items={items} />
+      <Filter filtrar={(peli) => this.filtrarMovie(peli)}/>
       <h3>Por venir...</h3>
       <Movies datos={this.state.mU} />
           <Link to="/MoviesR">Ver mas...</Link>

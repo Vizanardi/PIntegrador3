@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
 import Movies from '../../components/Movies/Movies';
+import Filter from '../../components/Filter/Filter';
 
 let items = [{pagina:"Home", direccion:"/"}, {pagina:"Popular Movies", direccion:"/MoviesP"}, {pagina:"TopRated Movies", direccion:"/MoviesR"}, {pagina:"UpComing Movies", direccion:"/MoviesU"}, {pagina: "Series", direccion:"/SeriesG"}, {pagina: "Favoritas", direccion:"/Favorites"}];
 
@@ -14,6 +15,8 @@ class MoviesG extends Component{
       mR: [],
       mP: [],
       mU: [],
+      Movies: [],
+      arrayBusqueda: [],
       page: 1,
     };
   }
@@ -72,11 +75,18 @@ class MoviesG extends Component{
             .catch(error => console.log(error))
     }
 
+    filtrarMovie(peli){
+        let juntarArrays = this.state.mP.concat(this.state.mR, this.state.mU)
+        this.setState({Movies: juntarArrays})
+        let movie = this.state.Movies.filter(movie => movie.title.toLowerCase().includes(peli))
+        this.setState({arrayBusqueda: movie})
+    }
+
   render() {
-    console.log(this.state.mR)
     return (
     <React.Fragment>
       <Navbar items={items} />
+      <Filter filtrar={(peli) => this.filtrarMovie(peli)}/>
       <h1>Cartelera de Peliculas</h1>
       <h3>Peliculas mas populares en Argentina Hoy</h3>
       <Movies datos={this.state.mP} />
