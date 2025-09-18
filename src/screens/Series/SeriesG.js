@@ -12,7 +12,8 @@ class SeriesG extends Component{
 
     this.state = {
       sP: [],
-      sT: []
+      sT: [], 
+      page: 1,
     };
   }
 
@@ -33,7 +34,7 @@ class SeriesG extends Component{
     .catch(err => console.error(err));
 
   
-  fetch('https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=1', options)
+  fetch('https://api.themoviedb.org/3/tv/popular?language=en-US&page=1', options)
     .then(res => res.json())
     .then(data => {
         this.setState({sT: data.results})
@@ -41,21 +42,37 @@ class SeriesG extends Component{
     .catch(err => console.error(err));  
   }
 
+  cargarMas(){
+    let next = this.state.page + 1;
+    this.setState({ page: next });
+
+          fetch(`https://api.themoviedb.org/3/tv/popular?language=en-US&page=${next}&api_key=6cd60cc23958a101209d2fbbba580236`)
+          .then(response => response.json())
+          .then(data => {this.setState({sP: this.state.sP.concat(data.results)})})
+          .catch(error => console.log(error))
+
+          fetch(`https://api.themoviedb.org/3/tv/popular?language=en-US&page=${next}&api_key=6cd60cc23958a101209d2fbbba580236`)
+          .then(response => response.json())
+          .then(data => {this.setState({sT: this.state.sT.concat(data.results)})})
+          .catch(error => console.log(error))
+  }
+
   render() {
     console.log(this.state.mR)
     return (
-    <React.Fragment>
-      <Navbar items={items} />
-      <h1>Cartelera de Series</h1>
-      <h3>Series más populares</h3>
-      <Series datos={this.state.sP} />
-          <Link to="/SeriesP">Ver mas...</Link>
-      
-      <h3>Premiadas</h3>
-      <Series datos={this.state.sT} />
-          <Link to="/SeriesT">Ver mas...</Link>
-      <Footer />
-    </React.Fragment>
+        <React.Fragment>
+            <Navbar items={items} />
+            <h1>Cartelera de Series</h1>
+            <h3>Series más populares</h3>
+            <Series datos={this.state.sP} />
+                <Link to="/SeriesP">Ver mas...</Link>
+        
+            <h3>Premiadas</h3>
+            <Series datos={this.state.sT} />
+                <Link to="/SeriesT">Ver mas...</Link>
+            <button onClick={() => this.cargarMas()}>Mas Series</button>
+            <Footer />
+        </React.Fragment>
   );
 }
   }

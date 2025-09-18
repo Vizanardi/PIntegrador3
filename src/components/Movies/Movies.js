@@ -3,9 +3,9 @@ import Movie from './Movie';
 
 class Movies extends Component {
         constructor(props){
-                super(props)}
+                super(props)
+                }
         render(){
-                console.log(this.props.datos)
           return (
             <section className='cards'>
                 <section className="cardBody">

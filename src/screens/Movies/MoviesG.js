@@ -14,6 +14,7 @@ class MoviesG extends Component{
       mR: [],
       mP: [],
       mU: [],
+      page: 1,
     };
   }
 
@@ -51,6 +52,26 @@ class MoviesG extends Component{
     .catch(err => console.error(err));
   }
 
+  cargarMas(){
+      let next = this.state.page + 1;
+      this.setState({ page: next });
+
+            fetch(`https://api.themoviedb.org/3/movie/popular?language=en-US&page=${next}&api_key=6cd60cc23958a101209d2fbbba580236`)
+            .then(response => response.json())
+            .then(data => {this.setState({mP: this.state.mP.concat(data.results)})})
+            .catch(error => console.log(error))
+
+            fetch(`https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=${next}&api_key=6cd60cc23958a101209d2fbbba580236`)
+            .then(response => response.json())
+            .then(data => {this.setState({mU: this.state.mU.concat(data.results)})})
+            .catch(error => console.log(error))
+            
+            fetch(`https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${next}&api_key=6cd60cc23958a101209d2fbbba580236`)
+            .then(response => response.json())
+            .then(data => {this.setState({mR: this.state.mR.concat(data.results)})})
+            .catch(error => console.log(error))
+    }
+
   render() {
     console.log(this.state.mR)
     return (
@@ -69,6 +90,7 @@ class MoviesG extends Component{
       <Movies datos={this.state.mU} />
           <Link to="/MoviesU">Ver mas...</Link>
       
+      <button onClick={() => this.cargarMas()}>Mas Peliculas</button>
       <Footer />
     </React.Fragment>
   );
