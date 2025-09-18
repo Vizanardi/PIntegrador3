@@ -7,7 +7,8 @@ class Filter extends Component {
          super(props)
          this.state = {
             busqueda: "",
-            arrayBusqueda: []
+            arrayBusqueda: [],
+            seccion: this.props.seccion,
          }
         }
 
@@ -24,7 +25,7 @@ class Filter extends Component {
         return (
                 <section className='Filter'>
                         <form className='form' onSubmit={(event) => this.evitarSubmit(event)}>
-                            <input type="text" placeholder='Filtrar personajes' onChange={(event) => this.controlarCambios(event)} value={this.state.busqueda}/>
+                            <input type="text" placeholder= {`Filtrar ${this.state.seccion}`} onChange={(event) => this.controlarCambios(event)} value={this.state.busqueda}/>
                         </form>
                 </section>       
         )}

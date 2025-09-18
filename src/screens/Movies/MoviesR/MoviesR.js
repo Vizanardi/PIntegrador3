@@ -13,6 +13,7 @@ class MoviesR extends Component{
     this.state = {
       mR: [],
       arrayBusqueda: [],
+      page:1
     };
   }
 
@@ -29,9 +30,19 @@ class MoviesR extends Component{
     .then(res => res.json())
     .then(data => {
       console.log(data)
-        this.setState({mR: data.results})
+        this.setState({mR: data.results, arrayBusqueda: data.results})
     })
     .catch(err => console.error(err));
+  }
+
+  cargarMas(){
+    let next = this.state.page + 1;
+    this.setState({ page: next });
+          
+          fetch(`https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${next}&api_key=6cd60cc23958a101209d2fbbba580236`)
+          .then(response => response.json())
+          .then(data => {this.setState({mR: this.state.mR.concat(data.results)})})
+          .catch(error => console.log(error))
   }
 
   filtrarMovie(peli){
@@ -43,10 +54,10 @@ class MoviesR extends Component{
     return (
     <React.Fragment>
       <Navbar items={items} />
-      <Filter filtrar={(peli) => this.filtrarMovie(peli)}/>
+      <Filter filtrar={(peli) => this.filtrarMovie(peli)} seccion={"Peliculas"}/>
       <h3>Nuestra seleccion de peliculas para ti</h3>
-      <Movies datos={this.state.mR} />
-          <Link to="/MoviesR">Ver mas...</Link>
+      <Movies datos={this.state.mR}  />
+      <button onClick={() => this.cargarMas()}>Mas Peliculas</button>
       <Footer />
     </React.Fragment>
   );

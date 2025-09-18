@@ -29,7 +29,7 @@ class SeriesT extends Component{
   fetch('https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=1', options)
     .then(res => res.json())
     .then(data => {
-        this.setState({sT: data.results})
+        this.setState({sT: data.results, arrayBusqueda: data.results})
     })
     .catch(err => console.error(err));  
   }
@@ -39,14 +39,16 @@ class SeriesT extends Component{
         this.setState({arrayBusqueda: serie})
     }
 
+
+
   render() {
     return (
     <React.Fragment>
       <Navbar items={items} />
-      <Filter filtrar={(ser) => this.filtrarSerie(ser)}/>
+      <Filter filtrar={(ser) => this.filtrarSerie(ser)} seccion={"Series"}/>
       <h3>Premiadas</h3>
-      <Series datos={this.state.sT} />
-          <Link to="/SeriesT">Ver mas...</Link>
+      <Series datos={this.state.sT}  />
+      <button onClick={() => this.cargarMas()}>Mas Peliculas</button>
       <Footer />
     </React.Fragment>
   );

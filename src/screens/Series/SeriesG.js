@@ -14,7 +14,6 @@ class SeriesG extends Component{
     this.state = {
       sP: [],
       sT: [], 
-      Series:[],
       page: 1,
       arrayBusqueda: []
     };
@@ -32,15 +31,15 @@ class SeriesG extends Component{
   fetch('https://api.themoviedb.org/3/tv/popular?language=en-US&page=1', options)
     .then(res => res.json())
     .then(data => {
-        this.setState({sP: data.results})
+        this.setState({sP: data.results, arrayBusqueda: data.results})
     })
     .catch(err => console.error(err));
 
   
-  fetch('https://api.themoviedb.org/3/tv/popular?language=en-US&page=1', options)
+  fetch('https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=1', options)
     .then(res => res.json())
     .then(data => {
-        this.setState({sT: data.results})
+        this.setState({sT: data.results, arrayBusqueda: data.results})
     })
     .catch(err => console.error(err));  
   }
@@ -62,8 +61,7 @@ class SeriesG extends Component{
 
   filtrarSerie(ser){
         let juntarArrays = this.state.sP.concat(this.state.sT)
-        this.setState({Series: juntarArrays})
-        let serie = this.state.Series.filter(serie => serie.name.toLowerCase().includes(ser))
+        let serie = juntarArrays.filter(serie => serie.name.toLowerCase().includes(ser))
         this.setState({arrayBusqueda: serie})
     }
 
@@ -71,13 +69,13 @@ class SeriesG extends Component{
     return (
         <React.Fragment>
             <Navbar items={items} />
-            <Filter filtrar={(ser) => this.filtrarSerie(ser)}/>
+            <Filter filtrar={(ser) => this.filtrarSerie(ser)} seccion={"Series"}/>
             <h1>Cartelera de Series</h1>
             <h3>Series más populares</h3>
-            <Series datos={this.state.sP} />
+            <Series datos={this.state.sP}/>
                 <Link to="/SeriesP">Ver mas...</Link>
             <h3>Premiadas</h3>
-            <Series datos={this.state.sT} />
+            <Series datos={this.state.sT}/>
                 <Link to="/SeriesT">Ver mas...</Link>
             <button onClick={() => this.cargarMas()}>Mas Series</button>
             <Footer />

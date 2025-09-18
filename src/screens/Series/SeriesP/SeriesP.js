@@ -29,7 +29,7 @@ class SeriesP extends Component{
   fetch('https://api.themoviedb.org/3/tv/popular?language=en-US&page=1', options)
     .then(res => res.json())
     .then(data => {
-        this.setState({sP: data.results})
+        this.setState({sP: data.results, arrayBusqueda: data.results})
     })
     .catch(err => console.error(err));
   }
@@ -43,10 +43,10 @@ class SeriesP extends Component{
     return (
     <React.Fragment>
       <Navbar items={items} />
-      <Filter filtrar={(ser) => this.filtrarSerie(ser)}/>
+      <Filter filtrar={(ser) => this.filtrarSerie(ser)} seccion={"Series"}/>
       <h3>Series más populares</h3>
-      <Series datos={this.state.sP} />
-          <Link to="/SeriesP">Ver mas...</Link>
+      <Series datos={this.state.sP}  />
+      <button onClick={() => this.cargarMas()}>Mas Peliculas</button>
       <Footer />
     </React.Fragment>
   );

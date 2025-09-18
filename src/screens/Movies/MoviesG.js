@@ -15,7 +15,6 @@ class MoviesG extends Component{
       mR: [],
       mP: [],
       mU: [],
-      Movies: [],
       arrayBusqueda: [],
       page: 1,
     };
@@ -34,7 +33,7 @@ class MoviesG extends Component{
     .then(res => res.json())
     .then(data => {
       console.log(data)
-        this.setState({mP: data.results})
+        this.setState({mP: data.results, arrayBusqueda: data.results})
     })
     .catch(err => console.error(err));
     
@@ -42,7 +41,7 @@ class MoviesG extends Component{
     .then(res => res.json())
     .then(data => {
       console.log(data)
-        this.setState({mU: data.results})
+        this.setState({mU: data.results, arrayBusqueda: data.results})
     })
     .catch(err => console.error(err));
 
@@ -50,7 +49,7 @@ class MoviesG extends Component{
     .then(res => res.json())
     .then(data => {
       console.log(data)
-        this.setState({mR: data.results})
+        this.setState({mR: data.results, arrayBusqueda: data.results})
     })
     .catch(err => console.error(err));
   }
@@ -77,8 +76,7 @@ class MoviesG extends Component{
 
     filtrarMovie(peli){
         let juntarArrays = this.state.mP.concat(this.state.mR, this.state.mU)
-        this.setState({Movies: juntarArrays})
-        let movie = this.state.Movies.filter(movie => movie.title.toLowerCase().includes(peli))
+        let movie = juntarArrays.filter(movie => movie.title.toLowerCase().includes(peli))
         this.setState({arrayBusqueda: movie})
     }
 
@@ -86,18 +84,18 @@ class MoviesG extends Component{
     return (
     <React.Fragment>
       <Navbar items={items} />
-      <Filter filtrar={(peli) => this.filtrarMovie(peli)}/>
+      <Filter filtrar={(peli) => this.filtrarMovie(peli)} seccion={"Peliculas"}/>
       <h1>Cartelera de Peliculas</h1>
       <h3>Peliculas mas populares en Argentina Hoy</h3>
       <Movies datos={this.state.mP} />
           <Link to="/MoviesP">Ver mas...</Link>
 
       <h3>Nuestra seleccion de peliculas para ti</h3>
-      <Movies datos={this.state.mR} />
+      <Movies datos={this.state.mR}/>
           <Link to="/MoviesR">Ver mas...</Link>
 
       <h3>Por venir...</h3>
-      <Movies datos={this.state.mU} />
+      <Movies datos={this.state.mU}/>
           <Link to="/MoviesU">Ver mas...</Link>
       
       <button onClick={() => this.cargarMas()}>Mas Peliculas</button>

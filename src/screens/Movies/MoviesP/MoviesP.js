@@ -14,6 +14,7 @@ class MoviesP extends Component{
     this.state = {
       mP: [],
       arrayBusqueda: [],
+      page: 1
     };
   }
 
@@ -30,9 +31,19 @@ class MoviesP extends Component{
     .then(res => res.json())
     .then(data => {
       console.log(data)
-        this.setState({mP: data.results})
+        this.setState({mP: data.results, arrayBusqueda: data.results})
     })
     .catch(err => console.error(err));
+  }
+
+  cargarMas(){
+    let next = this.state.page + 1;
+    this.setState({ page: next });
+
+          fetch(`https://api.themoviedb.org/3/movie/popular?language=en-US&page=${next}&api_key=6cd60cc23958a101209d2fbbba580236`)
+          .then(response => response.json())
+          .then(data => {this.setState({mP: this.state.mP.concat(data.results)})})
+          .catch(error => console.log(error))
   }
 
   filtrarMovie(peli){
@@ -44,10 +55,10 @@ class MoviesP extends Component{
     return (
     <React.Fragment>
       <Navbar items={items} />
-      <Filter filtrar={(peli) => this.filtrarMovie(peli)}/>
+      <Filter filtrar={(peli) => this.filtrarMovie(peli)} seccion={"Peliculas"}/>
       <h3>Peliculas mas populares en Argentina Hoy</h3>
-      <Movies datos={this.state.mP} />
-          <Link to="/MoviesP">Ver mas...</Link>
+      <Movies datos={this.state.mP}  />
+      <button onClick={() => this.cargarMas()}>Mas Peliculas</button>
       <Footer />
     </React.Fragment>
   );

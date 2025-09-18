@@ -12,7 +12,7 @@ import SeriesG from "./screens/Series/SeriesG";
 import SeriesP from "./screens/Series/SeriesP/SeriesP";
 import SeriesT from "./screens/Series/SeriesT/SeriesT";
 import UnaSerie from "./screens/UnaSerie/UnaSerie";
-import RBusqueda from "./screens/RBusqueda/RBusqueda";
+import RBusqueda from "./screens/RBusqueda/RBusquedaS";
 
 import {Route, Switch} from "react-router-dom";
 
