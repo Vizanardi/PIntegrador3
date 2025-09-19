@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Navbar from '../../components/Navbar/Navbar';
-import Footer from '../../components/Footer/Footer';
 import Movies from '../../components/Movies/Movies';
 import Series from '../../components/Series/Series';
+import Navbar from '../../components/Navbar/Navbar'
 
 let items = [{pagina:"Home", direccion:"/"}, {pagina:"Movies", direccion:"/MoviesG"}, {pagina: "Series", direccion:"/SeriesG"}, {pagina: "Favoritas", direccion:"/Favorites"}];
 
@@ -73,7 +72,7 @@ class Home extends Component{
     console.log(this.state.mR)
     return (
     <React.Fragment>
-      <Navbar items={items} />
+      <Navbar items={items}/>
       <h1>Cartelera de Peliculas</h1>
       <h3>Peliculas mas populares en Argentina Hoy</h3>
       <Movies datos={this.state.mP} />
@@ -95,9 +94,6 @@ class Home extends Component{
       <h3>Premiadas</h3>
       <Series datos={this.state.sT} />
           <Link to="/SeriesT">Ver mas...</Link>
-
-      
-      <Footer />
     </React.Fragment>
   );
 }

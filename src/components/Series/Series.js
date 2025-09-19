@@ -11,6 +11,7 @@ class Series extends Component {
                         {this.props.datos.length === 0 ? <h3>Cargando...</h3>: 
                         this.props.datos.map((carta, idx) => {
                            return <Serie key={idx + carta.id}
+                                          id = {carta.id}
                                           imagen={carta.poster_path} 
                                           nombre={carta.name} 
                                           descripcion={carta.overview}

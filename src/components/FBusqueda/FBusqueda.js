@@ -12,7 +12,13 @@ class FBusqueda extends Component {
 
         ejecutarBusqueda(e){
                 e.preventDefault()
-                this.props.history.push("/RBusqueda/" + this.state.categoria + "/" + this.state.busqueda)
+                if(this.state.categoria === "movie"){
+                        this.props.history.push("/RBusquedaM/" + this.state.busqueda)
+                }
+                else{
+                        this.props.history.push("/RBusquedaS/" + this.state.busqueda)
+                }
+                
         }
 
         controlarCambios(event){

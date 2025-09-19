@@ -1,0 +1,58 @@
+import React, { Component } from 'react'; 
+import SDetalle from '../../components/Series/SDetalle';
+import Navbar from '../../components/Navbar/Navbar';
+
+
+
+let items = [{pagina:"Home", direccion:"/"}, {pagina:"Movies", direccion:"/MoviesG"},  {pagina: "Series", direccion:"/SeriesG"}, {pagina: "Favoritas", direccion:"/Favorites"}];
+
+class UnaMovie extends Component{
+  constructor(props) {
+    super(props);
+
+    this.state = {
+        serie: null
+    }}
+
+    componentDidMount(){
+    const id = this.props.match.params.id
+
+    const options = {
+        method: 'GET',
+        headers: {
+          accept: 'application/json',
+          Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2Y2Q2MGNjMjM5NThhMTAxMjA5ZDJmYmJiYTU4MDIzNiIsIm5iZiI6MTc1NzYwOTI4NS4wMzMsInN1YiI6IjY4YzJmZDQ1OWY1MjQzOTg1MDhkMDU0NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.s3mwqyuQAAaihkRKOET-E5_lL96It2h3GcUILb_PHZQ'
+        }
+      };
+      
+      fetch(`https://api.themoviedb.org/3/tv/${id}?language=en-US`, options)
+        .then(res => res.json())
+        .then(data => {
+          this.setState({serie: data})
+        })
+        .catch(error => console.log(error))}
+
+  render(){
+    const s = this.state.serie
+    return (
+    <React.Fragment>
+      <Navbar items={items}/>
+      <h1>Más Info</h1>
+      {s?(<SDetalle
+                key={s.id}
+                id={s.id}
+                imagen={s.poster_path}
+                nombre={s.name}
+                clasificacion = {s.vote_average}
+                fecha= {s.first_air_date}
+                descripcion = {s.overview}
+                genero= {s.genres.name}
+
+              />):
+              (<p>Cargando...</p>)}
+    </React.Fragment>
+              
+  )};
+}
+
+export default UnaMovie;

@@ -49,7 +49,7 @@ class Serie extends Component {
   render(){
     return (
       <article className = "character-card">
-            <Link to={`/Series/id/${this.props.key}`}>
+            <Link to={`/Series/id/${this.props.id}`}>
             <img src={`https://image.tmdb.org/t/p/w500${this.props.imagen}`} alt={this.props.nombre} />
               <h2>{this.props.nombre}</h2>
             </Link>
@@ -63,7 +63,7 @@ class Serie extends Component {
               {this.state.enFavs ? <button onClick={() => this.quitarFavs()} >Quitar de Favoritos</button> : <button onClick={() => this.agregarAFavs()}>Agregar a Favoritos</button>}
 
 
-              <Link to={`/Series/id/${this.props.key}`}></Link>
+              <Link to={`/Series/id/${this.props.id}`}></Link>
     </article>     
     );
   };

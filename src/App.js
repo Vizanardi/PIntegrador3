@@ -12,14 +12,19 @@ import SeriesG from "./screens/Series/SeriesG";
 import SeriesP from "./screens/Series/SeriesP/SeriesP";
 import SeriesT from "./screens/Series/SeriesT/SeriesT";
 import UnaSerie from "./screens/UnaSerie/UnaSerie";
-import RBusqueda from "./screens/RBusqueda/RBusquedaS";
+import RBusquedaS from "./screens/RBusqueda/RBusquedaS";
+import RBusquedaM from "./screens/RBusqueda/RBusquedaM";
+import Navbar from './components/Navbar/Navbar';
+import Footer from './components/Footer/Footer';
 
 import {Route, Switch} from "react-router-dom";
+
+let items = [{pagina:"Home", direccion:"/"}, {pagina:"Popular Movies", direccion:"/MoviesP"}, {pagina:"TopRated Movies", direccion:"/MoviesR"}, {pagina:"UpComing Movies", direccion:"/MoviesU"}, {pagina: "Popular Series", direccion:"/SeriesP"}, {pagina: "TopRated Series", direccion:"/SeriesT"}, {pagina: "Favoritas", direccion:"/Favorites"}];
 
 function App() {
   return (
     <div className="App">
-      <Switch> 
+      <Switch>
           <Route path="/" exact={true} component={Home} />
           <Route path="/Movies/id/:id" component={UnaMovie} />
           <Route path="/MoviesG" component={MoviesG} />
@@ -33,9 +38,11 @@ function App() {
           <Route path="/Favourites" component={Favorites} />
           <Route path="/FavoritesM" component={FavoritesM} />
           <Route path="/FavoritesS" component={FavoritesS} />
-          <Route path="/RBusqueda/:name" component={RBusqueda}/>
+          <Route path="/RBusquedaS/:name" component={RBusquedaS}/>
+          <Route path= "/RBusquedaM/:title" component={RBusquedaM}/>
           <Route component={Error} />
       </Switch>
+      <Footer/>
     </div>
   );
 }

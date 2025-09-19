@@ -1,23 +1,12 @@
-import { Link } from 'react-router-dom';
 import React, {Component} from 'react';
 
-class Movie extends Component {
+class MovieDetalle extends Component {
   constructor(props){
          super(props);
          this.state = {
          valor: props.value,
-         verMas: false,
-         textoBotton: "Ver descripcion",
          enFavs: false
         }}
-
-    verMas(){
-    if (this.state.verMas === false){
-      this.setState({verMas: true, textoBotton: "Ver menos"})
-
-    }else{
-      this.setState({verMas: false, textoBotton: "Ver descripcion"})
-    }}
 
     agregarAFavs(){
       let favs= localStorage.getItem("moviesFavoritas")
@@ -47,26 +36,21 @@ class Movie extends Component {
       } 
     }
 
-
   render(){
     return (
       <article className = "character-card">
-            <Link to={`/Movies/id/${this.props.id}`}>
               <img src={`https://image.tmdb.org/t/p/w500${this.props.imagen}`} alt={this.props.nombre} />
               <h2>{this.props.nombre}</h2>
-            </Link>
-              
-              {this.state.verMas ? <section>
-                <p>{this.props.descripcion}</p>
-                </section>:""}  
-
-              <p onClick={() => this.verMas()} className="more">{this.state.textoBotton}</p>
+              <p>{this.props.descripcion}</p>
+              <p>{this.props.calificacion}</p>
+              <p>{this.props.fecha}</p>
+              <p>{this.props.duracion}</p>
+              <p>{this.props.genero}</p>
+        
 
               {this.state.enFavs ? <button onClick={() => this.quitarFavs()} >Quitar de Favoritos</button> : <button onClick={() => this.agregarAFavs()}>Agregar a Favoritos</button>}
-
-              <Link to={`/Movies/id/${this.props.id}`}></Link>
     </article>     
     );
   };
 }
-export default Movie;
+export default MovieDetalle;

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Navbar from '../../../components/Navbar/Navbar';
-import Footer from '../../../components/Footer/Footer';
 import Movies from "../../../components/Movies/Movies";
 import Filter from '../../../components/Filter/Filter';
+import Navbar from '../../../components/Navbar/Navbar'
+
 
 let items = [{pagina:"Home", direccion:"/"}, {pagina:"Popular Movies", direccion:"/MoviesP"}, {pagina:"TopRated Movies", direccion:"/MoviesR"}, {pagina:"UpComing Movies", direccion:"/MoviesU"}, {pagina: "Series", direccion:"/SeriesG"}, {pagina: "Favoritas", direccion:"/Favorites"}];
+
 class MoviesU extends Component{
   constructor(props) {
     super(props);
@@ -52,12 +53,11 @@ class MoviesU extends Component{
   render() {
     return (
     <React.Fragment>
-      <Navbar items={items} />
+      <Navbar items={items}/>
       <Filter filtrar={(peli) => this.filtrarMovie(peli)} seccion={"Peliculas"}/>
       <h3>Por venir...</h3>
       <Movies datos={this.state.mU}  />
       <button onClick={() => this.cargarMas()}>Mas Peliculas</button>
-      <Footer />
     </React.Fragment>
   );
 }

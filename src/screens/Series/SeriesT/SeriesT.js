@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Navbar from "../../../components/Navbar/Navbar";
-import Footer from '../../../components/Footer/Footer';
 import Series from '../../../components/Series/Series';
 import Filter from '../../../components/Filter/Filter';
+import Navbar from '../../../components/Navbar/Navbar'
+
 
 let items = [{pagina:"Home", direccion:"/"}, {pagina:"Movies", direccion:"/MoviesG"}, {pagina: "Popular Series", direccion:"/SeriesP"}, {pagina: "TopRated Series", direccion:"/SeriesT"}, {pagina: "Favoritas", direccion:"/Favorites"}];
 
@@ -44,12 +44,11 @@ class SeriesT extends Component{
   render() {
     return (
     <React.Fragment>
-      <Navbar items={items} />
+      <Navbar items={items}/>
       <Filter filtrar={(ser) => this.filtrarSerie(ser)} seccion={"Series"}/>
       <h3>Premiadas</h3>
       <Series datos={this.state.sT}  />
       <button onClick={() => this.cargarMas()}>Mas Peliculas</button>
-      <Footer />
     </React.Fragment>
   );
 }
