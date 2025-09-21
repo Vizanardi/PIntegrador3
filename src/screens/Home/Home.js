@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Movies from '../../components/Movies/Movies';
 import Series from '../../components/Series/Series';
 import Navbar from '../../components/Navbar/Navbar'
+import "../../assets/css/index.css"
 
 let items = [{pagina:"Home", direccion:"/"}, {pagina:"Movies", direccion:"/MoviesG"}, {pagina: "Series", direccion:"/SeriesG"}, {pagina: "Favoritas", direccion:"/Favorites"}];
 
@@ -74,26 +75,39 @@ class Home extends Component{
     <React.Fragment>
       <Navbar items={items}/>
       <h1>Cartelera de Peliculas</h1>
-      <h3>Peliculas mas populares en Argentina Hoy</h3>
+
+      <div className="section-title">
+        <h3>Peliculas mas populares en Argentina Hoy</h3> 
+        <Link to="/MoviesP" className="section-more">Ver mas</Link>
+      </div>
       <Movies datos={this.state.mP} />
-          <Link to="/MoviesP">Ver mas...</Link>
 
-      <h3>Nuestra seleccion de peliculas para ti</h3>
+      <div className="section-title">
+        <h3>Nuestra seleccion de peliculas para ti</h3> 
+        <Link to="/MoviesR" className="section-more">Ver mas</Link>
+      </div>
       <Movies datos={this.state.mR} />
-          <Link to="/MoviesR">Ver mas...</Link>
 
-      <h3>Por venir...</h3>
+      <div className="section-title">
+        <h3>Por venir...</h3>
+        <Link to="/MoviesU" className="section-more">Ver mas</Link>
+      </div>
       <Movies datos={this.state.mU} />
-          <Link to="/MoviesR">Ver mas...</Link>
-    
+          
       <h1>Cartelera de Series</h1>
-      <h3>Series más populares</h3>
+
+      <div className="section-title">
+        <h3>Series más populares</h3>
+        <Link to="/SeriesP" className="section-more">Ver mas</Link>
+      </div>
       <Series datos={this.state.sP} />
-          <Link to="/SeriesP">Ver mas...</Link>
-      
-      <h3>Premiadas</h3>
+
+      <div className="section-title">
+        <h3>Premiadas</h3>
+        <Link to="/SeriesT" className="section-more">Ver mas</Link>
+      </div>
       <Series datos={this.state.sT} />
-          <Link to="/SeriesT">Ver mas...</Link>
+          
     </React.Fragment>
   );
 }

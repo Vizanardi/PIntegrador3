@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import "../../../assets/css/index.css"
 import Movies from "../../../components/Movies/Movies";
 import Filter from '../../../components/Filter/Filter';
 import Navbar from '../../../components/Navbar/Navbar'
@@ -52,13 +52,15 @@ class MoviesU extends Component{
 
   render() {
     return (
-    <React.Fragment>
+    <div className="page--vertical">
       <Navbar items={items}/>
       <Filter filtrar={(peli) => this.filtrarMovie(peli)} seccion={"Peliculas"}/>
       <h3>Por venir...</h3>
-      <Movies datos={this.state.mU}  />
-      <button onClick={() => this.cargarMas()}>Mas Peliculas</button>
-    </React.Fragment>
+      <Movies datos={this.state.mU} vertical />
+      <div className="load-more">
+        <button onClick={() => this.cargarMas()}>Mas Peliculas</button>
+      </div>
+    </div>
   );
 }
   }

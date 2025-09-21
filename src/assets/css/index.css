@@ -1,0 +1,320 @@
+/* ===========================
+   THEME BASE
+=========================== */
+:root{
+  --bg: #141414;
+  --bg-soft: #181818;
+  --text: #e5e5e5;
+  --muted: #a3a3a3;
+  --accent: #e50914;
+  --accent-hover: #f40612;
+  --card: #1f1f1f;
+  --border: #2a2a2a;
+  --shadow: rgba(0,0,0,.5);
+}
+
+*{ box-sizing: border-box; }
+html, body, #root{ height: 100%; }
+body{
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  line-height: 1.4;
+}
+
+h1,h2,h3{ margin: 0 0 .75rem; }
+a{ color: inherit; text-decoration: none; }
+img{ display: block; width: 100%; height: auto; }
+
+/* ===========================
+   NAVBAR (tus clases actuales)
+=========================== */
+/* ===== NAVBAR ===== */
+.site-nav{
+  display:flex;
+  align-items:center;
+  gap:1rem;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: linear-gradient(to bottom, rgba(20,20,20,.95), rgba(20,20,20,.85));
+  border-bottom: 1px solid var(--border);
+  padding: .75rem 1rem;
+}
+.site-nav h1{
+  margin:0;
+  color: var(--accent);
+  font-weight: 800;
+  letter-spacing: .5px;
+}
+.nav-links{
+  display:flex;
+  gap:1rem;
+  list-style:none;
+  margin:0;
+  padding:0;
+}
+.nav-links .nav-link{
+  color:var(--text);
+  padding:.35rem .6rem;
+  border-radius:.25rem;
+  transition: transform .15s, background-color .15s;
+}
+.nav-links .nav-link:hover{ background:var(--bg-soft); transform:translateY(-1px); }
+
+/* Buscador a la derecha */
+.site-nav .FBusqueda{ margin-left:auto; padding:0; }
+.site-nav .FBusqueda .search{
+  display:grid;
+  grid-template-columns: 260px 120px; /* input + select */
+  gap:.5rem;
+}
+.site-nav .FBusqueda input[type="text"],
+.site-nav .FBusqueda select{
+  background: var(--card);
+  border:1px solid var(--border);
+  color:var(--text);
+  padding:.45rem .6rem;
+  border-radius:.35rem;
+  outline:none;
+}
+
+
+/* ===========================
+   SEARCH + FILTER
+=========================== */
+.FBusqueda{ padding: 0 1rem; }
+.FBusqueda .search{
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: .5rem;
+}
+.FBusqueda input[type="text"],
+.FBusqueda select{
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: .55rem .7rem;
+  border-radius: .35rem;
+  outline: none;
+}
+.filter{
+  padding: .5rem 1rem 0;
+}
+.filter .form input{
+  width: 100%;
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: .55rem .7rem;
+  border-radius: .35rem;
+}
+
+button{
+  cursor: pointer;
+  background: var(--accent);
+  border: none;
+  color: #fff;
+  padding: .55rem .9rem;
+  border-radius: .35rem;
+  font-weight: 600;
+  transition: transform .12s ease, background-color .12s ease, box-shadow .12s ease;
+}
+button:hover{
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px -6px var(--shadow);
+}
+
+.cards-grid{ padding: .75rem 1.25rem; }
+.cards-inner{
+  display:grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(180px, 1fr);
+  gap:.85rem;
+  overflow-x: auto;
+  padding-bottom:.25rem;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+.cards-inner{ scrollbar-width:none; }
+.cards-inner::-webkit-scrollbar{ display:none; }
+
+/* ===========================
+   CARD
+=========================== */
+/* ===== CARD ===== */
+.card{
+  display:flex;
+  flex-direction:column;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:.5rem;
+  overflow:hidden;
+  box-shadow:0 10px 24px -16px var(--shadow);
+  transition: transform .2s, box-shadow .2s, border-color .2s;
+  scroll-snap-align: start;
+  position:relative;
+  height:100%;
+}
+.card:hover{ transform:translateY(-3px); border-color:#333; box-shadow:0 14px 32px -18px rgba(0,0,0,.6); }
+
+.card img{
+  aspect-ratio: 16/9;
+  object-fit:cover;
+  width:100%;
+}
+
+/* títulos parejos para que el footer no suba/baje */
+.card h2{
+  font-size:1rem;
+  margin:.6rem .75rem .2rem;
+  min-height: 2.6rem;           /* ~dos líneas */
+  display:flex; align-items:flex-end;
+}
+
+/* texto base */
+.card p{ color:var(--muted); font-size:.9rem; margin:.35rem .9rem; }
+
+/* “Ver descripción” SIEMPRE pegado al fondo, y el botón debajo */
+.toggle-more{
+  margin-top:auto;               /* << ancla la zona inferior */
+  align-self:flex-start;
+  margin: .6rem .75rem .5rem;
+  background:transparent;
+  color:var(--text);
+  border:1px solid var(--border);
+  padding:.4rem .7rem; border-radius:.35rem;
+}
+.toggle-more:hover{ background:var(--bg-soft); border-color:#3a3a3a; }
+
+.card .show{
+  background:#111;
+  border-top:1px solid var(--border);
+  padding:.7rem .9rem .9rem;
+  margin-top:.35rem;
+}
+
+/* botón con separación decente del borde */
+.card button{ margin:.25rem .75rem 1rem; }
+
+
+/* ===== Páginas verticales ===== */
+.page--vertical .cards-grid{
+  padding:.75rem 1.25rem 0;
+  max-width: 1200px;
+  margin: 0 auto;              /* centra el contenedor */
+}
+.page--vertical .cards-inner{
+  grid-auto-flow: row;          /* vertical */
+  grid-auto-columns: unset;
+  overflow: visible;            /* sin scroll horizontal */
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  justify-items: center;        /* centra las cards */
+}
+/* posters un poco más altos para vertical */
+.page--vertical .card img{ aspect-ratio: 2/3; }
+
+/* botón centrado */
+.load-more{ display:flex; justify-content:center; margin: 1rem auto 2rem; }
+
+/* ===== Título + "Ver más" al lado (Home) ===== */
+.section-title{
+  display:flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap:.75rem;
+  padding: .25rem 1.25rem .5rem;
+}
+.section-title h3{
+  padding: 0;
+  margin: 0;
+}
+.section-title a.section-more{
+  color:#0163cc;
+  font-weight: 700;
+  transition: color .15s ease, text-shadow .15s ease;
+}
+.section-title a.section-more:hover{
+  color:#3ea0ff;
+  text-shadow:0 0 8px rgba(62,160,255,.35); 
+}
+
+/* ===== DETALLE COMO TARJETA GRANDE ===== */
+.detail-card{
+  max-width: 1100px;
+  margin: 1.25rem auto 2rem;
+  padding: 1rem;
+  display:grid;
+  grid-template-columns: 360px 1fr;
+  gap: 1rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius:.75rem;
+  box-shadow: 0 14px 32px -18px rgba(0,0,0,.6);
+}
+.detail-card .poster{
+  overflow:hidden; border-radius:.5rem; border:1px solid var(--border);
+}
+.detail-card .poster img{ display:block; width:100%; aspect-ratio: 2/3; object-fit:cover; }
+.detail-card .info{ display:flex; flex-direction:column; gap:.5rem; }
+.detail-card .title{ font-size: clamp(1.4rem, 2vw, 2rem); margin:.25rem 0 .25rem; }
+.detail-card .meta{ display:flex; gap:1rem; color:var(--muted); font-size:.95rem; flex-wrap:wrap; }
+.detail-card .desc{ color:#ddd; line-height:1.5; }
+.detail-card .actions{ margin-top:auto; display:flex; gap:.75rem; }
+.detail-card .actions button{ padding:.65rem 1rem; }
+
+/* ===========================
+   TITULARES Y ENLACES "VER MÁS..."
+=========================== */
+h1{
+  font-size: 1.6rem;
+  padding: .75rem 1.25rem .25rem;
+}
+h3{
+  font-weight: 700;
+  color: #fff;
+  opacity: .95;
+  padding: .25rem 1.25rem .5rem;
+}
+a[href*="Ver mas"]{
+  display: inline-block;
+  margin: .25rem 1.25rem 1rem;
+  color: var(--muted);
+}
+a[href*="Ver mas"]:hover{ color: var(--text); }
+
+/* ===========================
+   FOOTER
+=========================== */
+.site-footer{
+  margin-top: 2rem;
+  padding: 1.25rem;
+  background: var(--bg-soft);
+  border-top: 1px solid var(--border);
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  color: var(--muted);
+  font-size: .95rem;
+}
+
+/* ===== Breakpoints ===== */
+@media (min-width: 768px){
+  .cards-inner{ grid-auto-columns: minmax(220px, 1fr); gap: 1rem; }
+}
+@media (min-width: 1200px){
+  .cards-inner{ grid-auto-columns: minmax(260px, 1fr); }
+}
+@media (max-width: 900px){
+  .site-nav .FBusqueda .search{ grid-template-columns: 1fr 110px; }
+}
+@media (max-width: 600px){
+  .site-nav{ flex-wrap: wrap; }
+  .nav-links{ width:100%; order:3; gap:.5rem; }
+  .site-nav .FBusqueda{ order:2; width:100%; }
+  .site-nav .FBusqueda .search{ grid-template-columns: 1fr 100px; }
+  .cards-inner{ grid-auto-columns: minmax(160px, 1fr); }
+}

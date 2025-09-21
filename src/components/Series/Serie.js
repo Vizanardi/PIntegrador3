@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import React, {Component} from 'react';
+import "../../assets/css/index.css"
 
 class Serie extends Component {
   constructor(props){
@@ -48,22 +49,19 @@ class Serie extends Component {
 
   render(){
     return (
-      <article className = "character-card">
+      <article className = "card">
             <Link to={`/Series/id/${this.props.id}`}>
             <img src={`https://image.tmdb.org/t/p/w500${this.props.imagen}`} alt={this.props.nombre} />
               <h2>{this.props.nombre}</h2>
             </Link>
 
-            {this.state.verMas ? <section>
+            {this.state.verMas ? <section className="show">
                 <p>{this.props.descripcion}</p>
                 </section>:""}  
 
-              <p onClick={() => this.verMas()} className="more">{this.state.textoBotton}</p>
+              <p onClick={() => this.verMas()} className="toggle-more">{this.state.textoBotton}</p>
 
               {this.state.enFavs ? <button onClick={() => this.quitarFavs()} >Quitar de Favoritos</button> : <button onClick={() => this.agregarAFavs()}>Agregar a Favoritos</button>}
-
-
-              <Link to={`/Series/id/${this.props.id}`}></Link>
     </article>     
     );
   };

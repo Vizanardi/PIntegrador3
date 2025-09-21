@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
 import FBusqueda from '../FBusqueda/FBusqueda';
+import "../../assets/css/index.css"
 
 function Navbar (props){
     return(
-            <nav>
+            <nav className="site-nav">
                 <h1>MVSFlix</h1>
-                <ul className="nav nav-tabs my-4">
+                <ul className="nav-links">
                     {props.items.map((item, idx) => (<li key={item + idx} className="nav-item">
                         <Link className="nav-link" to={item.direccion}>{item.pagina}</Link>
                     </li>))}

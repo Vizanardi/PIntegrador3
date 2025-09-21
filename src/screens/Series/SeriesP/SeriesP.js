@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import "../../../assets/css/index.css"
 import Series from '../../../components/Series/Series';
 import Filter from '../../../components/Filter/Filter';
 import Navbar from '../../../components/Navbar/Navbar'
@@ -14,6 +14,7 @@ class SeriesP extends Component{
     this.state = {
       sP: [],
       arrayBusqueda: [],
+      page:1
     };
   }
 
@@ -34,6 +35,16 @@ class SeriesP extends Component{
     .catch(err => console.error(err));
   }
 
+  cargarMas(){
+    let next = this.state.page + 1;
+    this.setState({ page: next });
+          
+          fetch(`https://api.themoviedb.org/3/tv/popular?language=en-US&page=${next}&api_key=6cd60cc23958a101209d2fbbba580236`)
+          .then(response => response.json())
+          .then(data => {this.setState({sP: this.state.sP.concat(data.results)})})
+          .catch(error => console.log(error))
+  }
+
   filtrarSerie(ser){
         let serie = this.state.sP.filter(serie => serie.name.toLowerCase().includes(ser))
         this.setState({arrayBusqueda: serie})
@@ -41,13 +52,15 @@ class SeriesP extends Component{
 
   render() {
     return (
-    <React.Fragment>
+    <div>
       <Navbar items={items}/>
       <Filter filtrar={(ser) => this.filtrarSerie(ser)} seccion={"Series"}/>
       <h3>Series más populares</h3>
-      <Series datos={this.state.sP}  />
-      <button onClick={() => this.cargarMas()}>Mas Peliculas</button>
-    </React.Fragment>
+      <Series datos={this.state.sP} vertical />
+      <div className="load-more">
+        <button onClick={() => this.cargarMas()}>Mas Series</button>
+      </div>
+    </div>
   );
 }
   }

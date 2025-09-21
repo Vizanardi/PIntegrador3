@@ -1,5 +1,6 @@
 import { withRouter } from 'react-router-dom';
 import React, { Component } from 'react';
+import "../../assets/css/index.css"
 
 class FBusqueda extends Component {
         constructor(props){
@@ -33,7 +34,7 @@ class FBusqueda extends Component {
              
         return (
                 <section className='FBusqueda'>
-                    <form onSubmit={(e) => this.ejecutarBusqueda(e)}>
+                    <form className="search" onSubmit={(e) => this.ejecutarBusqueda(e)}>
                         <input type="text" placeholder='Buscar...' onChange={(event) => this.controlarCambios(event)} value={this.state.busqueda}/>
                         <select onChange={(cat) => this.controlarCategoria(cat)}>
                                 <option value="movie">Peliculas</option>

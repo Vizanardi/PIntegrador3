@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import "../../assets/css/index.css"
 
 class SerieDetalle extends Component {
   constructor(props){
@@ -39,20 +40,13 @@ class SerieDetalle extends Component {
 
   render(){
     return (
-      <article className = "character-card">
+      <article className = "card">
             <img src={`https://image.tmdb.org/t/p/w500${this.props.imagen}`} alt={this.props.nombre} />
               <h2>{this.props.nombre}</h2>
-              <p>{this.props.clasificacion}</p>
-              <p>{this.props.fecha}</p>
-              <p>{this.props.descripcion}</p>
-              <p>{this.props.genero}</p>
-
-            {this.state.verMas ? <section>
-                <p>{this.props.descripcion}</p>
-                </section>:""}  
-
-              <p onClick={() => this.verMas()} className="more">{this.state.textoBotton}</p>
-
+              <p>Trama: {this.props.descripcion}</p>
+              <p>Rating: {this.props.clasificacion}</p>
+              <p>Fecha de estreno: {this.props.fecha}</p>
+              <p>Genero: {this.props.genero}</p>
               {this.state.enFavs ? <button onClick={() => this.quitarFavs()} >Quitar de Favoritos</button> : <button onClick={() => this.agregarAFavs()}>Agregar a Favoritos</button>}
 
     </article>     

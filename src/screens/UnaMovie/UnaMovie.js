@@ -1,6 +1,7 @@
 import React, { Component } from 'react'; 
 import MDetalle from '../../components/Movies/MDetalle';
 import Navbar from '../../components/Navbar/Navbar';
+import "../../assets/css/index.css"
 
 
 let items = [{pagina:"Home", direccion:"/"}, {pagina:"Movies", direccion:"/MoviesG"},  {pagina: "Series", direccion:"/SeriesG"}, {pagina: "Favoritas", direccion:"/Favorites"}];
@@ -41,15 +42,13 @@ class UnaMovie extends Component{
       {m?(<MDetalle
                 key={m.id}
                 id={m.id}
-                imagen={m.poster_path}
+                imagen={m.backdrop_path}
                 nombre={m.title}
                 descripcion = {m.overview}
-                calificaion = {m.vote_average}
+                calificacion = {m.vote_average}
+                genero= {m.genres.name}
                 fecha = {m.release_date}
                 duracion= {m.runtime}
-                genero= {m.genres.name}
-              
-
               />):
               (<p>Cargando...</p>)}
     </React.Fragment>

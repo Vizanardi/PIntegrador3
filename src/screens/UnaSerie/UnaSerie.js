@@ -1,12 +1,13 @@
 import React, { Component } from 'react'; 
 import SDetalle from '../../components/Series/SDetalle';
 import Navbar from '../../components/Navbar/Navbar';
+import "../../assets/css/index.css"
 
 
 
 let items = [{pagina:"Home", direccion:"/"}, {pagina:"Movies", direccion:"/MoviesG"},  {pagina: "Series", direccion:"/SeriesG"}, {pagina: "Favoritas", direccion:"/Favorites"}];
 
-class UnaMovie extends Component{
+class UnaSerie extends Component{
   constructor(props) {
     super(props);
 
@@ -41,13 +42,12 @@ class UnaMovie extends Component{
       {s?(<SDetalle
                 key={s.id}
                 id={s.id}
-                imagen={s.poster_path}
+                imagen={s.backdrop_path}
                 nombre={s.name}
-                clasificacion = {s.vote_average}
-                fecha= {s.first_air_date}
                 descripcion = {s.overview}
+                calificacion = {s.vote_average}
                 genero= {s.genres.name}
-
+                fecha= {s.first_air_date}
               />):
               (<p>Cargando...</p>)}
     </React.Fragment>
@@ -55,4 +55,4 @@ class UnaMovie extends Component{
   )};
 }
 
-export default UnaMovie;
+export default UnaSerie;

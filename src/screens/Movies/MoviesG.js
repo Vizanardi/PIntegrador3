@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Movies from '../../components/Movies/Movies';
 import Filter from '../../components/Filter/Filter';
 import Navbar from '../../components/Navbar/Navbar'
+import "../../assets/css/index.css"
 
 
 let items = [{pagina:"Home", direccion:"/"}, {pagina:"Popular Movies", direccion:"/MoviesP"}, {pagina:"TopRated Movies", direccion:"/MoviesR"}, {pagina:"UpComing Movies", direccion:"/MoviesU"}, {pagina: "Series", direccion:"/SeriesG"}, {pagina: "Favoritas", direccion:"/Favorites"}];
@@ -86,19 +87,27 @@ class MoviesG extends Component{
       <Navbar items={items}/>
       <Filter filtrar={(peli) => this.filtrarMovie(peli)} seccion={"Peliculas"}/>
       <h1>Cartelera de Peliculas</h1>
-      <h3>Peliculas mas populares en Argentina Hoy</h3>
+      <div className="section-title">
+        <h3>Peliculas mas populares en Argentina Hoy</h3>
+        <Link to="/MoviesP" className="section-more">Ver mas</Link>
+      </div>
       <Movies datos={this.state.mP} />
-          <Link to="/MoviesP">Ver mas...</Link>
 
-      <h3>Nuestra seleccion de peliculas para ti</h3>
+      <div className="section-title">
+        <h3>Nuestra seleccion de peliculas para ti</h3>
+        <Link to="/MoviesR" className="section-more">Ver mas</Link>
+      </div>
       <Movies datos={this.state.mR}/>
-          <Link to="/MoviesR">Ver mas...</Link>
 
-      <h3>Por venir...</h3>
+      <div className="section-title">
+        <h3>Por venir...</h3>
+        <Link to="/MoviesU" className="section-more">Ver mas</Link>
+      </div>
       <Movies datos={this.state.mU}/>
-          <Link to="/MoviesU">Ver mas...</Link>
-      
-      <button onClick={() => this.cargarMas()}>Mas Peliculas</button>
+
+      <div className="load-more">
+        <button onClick={() => this.cargarMas()}>Mas Peliculas</button>
+      </div>
     </React.Fragment>
   );
 }

@@ -1,6 +1,5 @@
-import Movie from "../Movies/Movie";
-import Serie from "../Series/Serie";
 import React, { Component } from 'react';
+import "../../assets/css/index.css"
 
 class Filter extends Component {
         constructor(props){
@@ -23,7 +22,7 @@ class Filter extends Component {
 
         render(){
         return (
-                <section className='Filter'>
+                <section className='filter'>
                         <form className='form' onSubmit={(event) => this.evitarSubmit(event)}>
                             <input type="text" placeholder= {`Filtrar ${this.state.seccion}`} onChange={(event) => this.controlarCambios(event)} value={this.state.busqueda}/>
                         </form>

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Series from '../../components/Series/Series';
 import Filter from '../../components/Filter/Filter';
 import Navbar from '../../components/Navbar/Navbar'
-
+import "../../assets/css/index.css"
 
 let items = [{pagina:"Home", direccion:"/"}, {pagina:"Movies", direccion:"/MoviesG"}, {pagina: "Popular Series", direccion:"/SeriesP"}, {pagina: "TopRated Series", direccion:"/SeriesT"}, {pagina: "Favoritas", direccion:"/Favorites"}];
 
@@ -53,7 +53,7 @@ class SeriesG extends Component{
           .then(data => {this.setState({sP: this.state.sP.concat(data.results)})})
           .catch(error => console.log(error))
 
-          fetch(`https://api.themoviedb.org/3/tv/popular?language=en-US&page=${next}&api_key=6cd60cc23958a101209d2fbbba580236`)
+          fetch(`https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=${next}&api_key=6cd60cc23958a101209d2fbbba580236`)
           .then(response => response.json())
           .then(data => {this.setState({sT: this.state.sT.concat(data.results)})})
           .catch(error => console.log(error))
@@ -71,13 +71,22 @@ class SeriesG extends Component{
             <Navbar items={items}/>
             <Filter filtrar={(ser) => this.filtrarSerie(ser)} seccion={"Series"}/>
             <h1>Cartelera de Series</h1>
-            <h3>Series más populares</h3>
+
+            <div className="section-title">
+              <h3>Series más populares</h3>
+              <Link to="/SeriesP" className="section-more">Ver mas</Link>
+            </div>
             <Series datos={this.state.sP}/>
-                <Link to="/SeriesP">Ver mas...</Link>
-            <h3>Premiadas</h3>
+
+            <div className="section-title">
+              <h3>Premiadas</h3>
+              <Link to="/SeriesT" className="section-more">Ver mas</Link>
+            </div>
             <Series datos={this.state.sT}/>
-                <Link to="/SeriesT">Ver mas...</Link>
-            <button onClick={() => this.cargarMas()}>Mas Series</button>
+
+            <div className="load-more">
+              <button onClick={() => this.cargarMas()}>Mas Series</button>
+            </div>
         </React.Fragment>
   );
 }

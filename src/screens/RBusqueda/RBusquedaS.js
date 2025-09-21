@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Filter from '../../components/Filter/Filter';
 import Series from '../../components/Series/Series';
 import Navbar from '../../components/Navbar/Navbar'
-
+import "../../assets/css/index.css"
 
 let items = [{pagina:"Home", direccion:"/"}, {pagina:"Movies", direccion:"/MoviesG"},  {pagina: "Series", direccion:"/SeriesG"}, {pagina: "Favoritas", direccion:"/Favorites"}];
 
