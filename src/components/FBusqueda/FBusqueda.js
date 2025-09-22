@@ -14,10 +14,10 @@ class FBusqueda extends Component {
         ejecutarBusqueda(e){
                 e.preventDefault()
                 if(this.state.categoria === "movie"){
-                        this.props.history.push("/RBusquedaM/" + this.state.busqueda)
+                        this.props.history.push("/RBusquedaM/" + this.state.busqueda + "/" +this.state.categoria)
                 }
                 else{
-                        this.props.history.push("/RBusquedaS/" + this.state.busqueda)
+                        this.props.history.push("/RBusquedaS/" + this.state.busqueda + "/" + this.state.categoria)
                 }
                 
         }
@@ -38,7 +38,7 @@ class FBusqueda extends Component {
                         <input type="text" placeholder='Buscar...' onChange={(event) => this.controlarCambios(event)} value={this.state.busqueda}/>
                         <select onChange={(cat) => this.controlarCategoria(cat)}>
                                 <option value="movie">Peliculas</option>
-                                <option value="serie">Series</option>
+                                <option value="tv">Series</option>
                         </select>
                     </form>
                 </section>       

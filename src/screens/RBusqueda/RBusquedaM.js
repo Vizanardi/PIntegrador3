@@ -11,7 +11,7 @@ class RBusquedaM extends Component{
     super(props);
 
     this.state = {
-      resulatdosM: [],
+      resultadosM: [],
       arrayBusqueda: [],
       title : props.match.params.title,
     };
@@ -26,16 +26,18 @@ class RBusquedaM extends Component{
             }
         };
     
-    fetch(`https://api.themoviedb.org/3/search/movie?query=${this.state.title}&include_adult=false&language=en-US&page=1`)
+    fetch(`https://api.themoviedb.org/3/search/movie?query=${this.state.title}&include_adult=false&language=en-US&page=1`,options)
         .then(res => res.json())
         .then(data => {
-            this.setState({resulatdosM: data.results, arrayBusqueda: data.results})
+          console.log(data);
+          
+            this.setState({resultadosM: data.results, arrayBusqueda: data.results})
         })
         .catch(error => console.log(error))
     }
 
     filtrarMovie(mov){
-      let movie = this.state.resulatdosM.filter(movie => movie.title.toLowerCase().includes(mov))
+      let movie = this.state.resultadosM.filter(movie => movie.title.toLowerCase().includes(mov))
       this.setState({arrayBusqueda: movie})
     }
 

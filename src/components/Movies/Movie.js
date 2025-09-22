@@ -41,8 +41,8 @@ class Movie extends Component {
       let favs= localStorage.getItem("moviesFavoritas")
       if(favs !== null){
         let parciado = JSON.parse(favs)
-        parciado.filter(id => id !== this.props.id)
-        let stringParciado = JSON.stringify(parciado)
+        let actualizado = parciado.filter(id => id !== this.props.id)
+        let stringParciado = JSON.stringify(actualizado)
         localStorage.setItem("moviesFavoritas", stringParciado)
         this.setState({enFavs: false})
       } 

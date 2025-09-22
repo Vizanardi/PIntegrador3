@@ -7,10 +7,12 @@ class Movies extends Component {
                 super(props)
                 }
         render(){
+                
+                
           return (
             <section className='cards-grid'>
                 <section className="cards-inner">
-                        {this.props.datos.length === 0 ? <h3>Cargando...</h3>: 
+                        {this.props.datos && this.props.datos.length === 0 ? <h3>Cargando...</h3>: 
                         this.props.datos.map((carta, idx) => {
                            return <Movie  key={idx + carta.id}
                                           id = {carta.id}

@@ -26,7 +26,7 @@ class RBusquedaS extends Component{
         Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2Y2Q2MGNjMjM5NThhMTAxMjA5ZDJmYmJiYTU4MDIzNiIsIm5iZiI6MTc1NzYwOTI4NS4wMzMsInN1YiI6IjY4YzJmZDQ1OWY1MjQzOTg1MDhkMDU0NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.s3mwqyuQAAaihkRKOET-E5_lL96It2h3GcUILb_PHZQ'
       }}
     
-    fetch(`https://api.themoviedb.org/3/search/tv?query=${this.state.name}&include_adult=false&language=en-US&page=1`)
+    fetch(`https://api.themoviedb.org/3/search/tv?query=${this.state.name}&include_adult=false&language=en-US&page=1`,options)
         .then(res => res.json())
         .then(data => {
             this.setState({resulatdosS: data.results, arrayBusqueda: data.results})
