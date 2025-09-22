@@ -85,7 +85,7 @@ class MoviesG extends Component{
     return (
     <React.Fragment>
       <Navbar items={items}/>
-      <Filter filtrar={(peli) => this.filtrarMovie(peli)} seccion={"Peliculas"}/>
+      <Filter Link to="/RBusquedaM" filtrar={(peli) => this.filtrarMovie(peli)} seccion={"Peliculas"}/>
       <h1>Cartelera de Peliculas</h1>
       <div className="section-title">
         <h3>Peliculas mas populares en Argentina Hoy</h3>

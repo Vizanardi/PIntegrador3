@@ -35,22 +35,43 @@ class UnaMovie extends Component{
 
   render(){
     const m = this.state.movie
+    
+    if (m === null) {
+      return (
+        <React.Fragment>
+          <Navbar items={items}/>
+          <h1>Más Info</h1>
+          <p>Cargando...</p>
+        </React.Fragment>
+      );
+    }
+
+    let generos = "No disponible";
+    if (m.genres && m.genres.length > 0) {
+      generos = "";
+      for (let i = 0; i < m.genres.length; i++) {
+        generos += m.genres[i].name;
+        if (i < m.genres.length - 1) {
+          generos += ", ";
+        }
+      }
+    }
+
     return (
     <React.Fragment>
       <Navbar items={items}/>
       <h1>Más Info</h1>
-      {m?(<MDetalle
+      <MDetalle
                 key={m.id}
                 id={m.id}
                 imagen={m.backdrop_path}
                 nombre={m.title}
                 descripcion = {m.overview}
                 calificacion = {m.vote_average}
-                genero= {m.genres.name}
+                genero= {generos}
                 fecha = {m.release_date}
                 duracion= {m.runtime}
-              />):
-              (<p>Cargando...</p>)}
+              />
     </React.Fragment>
               
   )};

@@ -54,7 +54,7 @@ class MoviesU extends Component{
     return (
     <div className="page--vertical">
       <Navbar items={items}/>
-      <Filter filtrar={(peli) => this.filtrarMovie(peli)} seccion={"Peliculas"}/>
+      <Filter Link to="/RBusquedaM" filtrar={(peli) => this.filtrarMovie(peli)} seccion={"Peliculas"}/>
       <h3>Por venir...</h3>
       <Movies datos={this.state.mU} vertical />
       <div className="load-more">

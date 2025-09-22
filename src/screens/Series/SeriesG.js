@@ -69,7 +69,7 @@ class SeriesG extends Component{
     return (
         <React.Fragment>
             <Navbar items={items}/>
-            <Filter filtrar={(ser) => this.filtrarSerie(ser)} seccion={"Series"}/>
+            <Link to="/RBusquedaS"><Filter filtrar={(ser) => this.filtrarSerie(ser)} seccion={"Series"}/></Link>
             <h1>Cartelera de Series</h1>
 
             <div className="section-title">

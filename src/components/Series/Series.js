@@ -16,9 +16,6 @@ class Series extends Component {
                                           imagen={carta.backdrop_path} 
                                           nombre={carta.name} 
                                           descripcion={carta.overview}
-                                          agregarFav={this.props.agregarFav}
-                                          enFavoritos={this.props.enFavoritos}
-                                          quitarFav={this.props.quitarFav}
                                         />})} 
                 </section>
         </section>       

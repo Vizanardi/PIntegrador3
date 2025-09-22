@@ -23,34 +23,39 @@ class Favorites extends Component {
     let moviesFavs = localStorage.getItem("moviesFavoritas");
     let seriesFavs = localStorage.getItem("seriesFavoritas");
 
-
-
     if (moviesFavs !== null) {
       let arrayMovies = JSON.parse(moviesFavs);
+      let moviesAr = []
       arrayMovies.map(id => {
-        
-        fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=6cd60cc23958a101209d2fbbba580236&language=en-US`)
+        if (arrayMovies !== null){
+          fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=6cd60cc23958a101209d2fbbba580236&language=en-US`)
           .then(res => res.json())
           .then(data => {
+            moviesAr.push(data)
             this.setState({
-              movies: this.state.movies.concat(data)
+              movies: moviesAr
             });
           })
           .catch(err => console.log(err));
-      });
+      ;}
+    }) 
     }
 
     if (seriesFavs !== null) {
       let arraySeries = JSON.parse(seriesFavs);
-      arraySeries.forEach(id => {
-        fetch(`https://api.themoviedb.org/3/tv/${id}?api_key=6cd60cc23958a101209d2fbbba580236&language=en-US`)
+      let seriesAr = []
+      arraySeries.map(id => {
+        if (arraySeries !== null){
+          fetch(`https://api.themoviedb.org/3/tv/${id}?api_key=6cd60cc23958a101209d2fbbba580236&language=en-US`)
           .then(res => res.json())
           .then(data => {
+            seriesAr.push(data)
             this.setState({
-              series: this.state.series.concat(data)
+              series: seriesAr
             });
           })
           .catch(err => console.log(err));
+        }
       });
     }
   }

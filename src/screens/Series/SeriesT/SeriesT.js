@@ -54,7 +54,7 @@ class SeriesT extends Component{
     return (
     <div className="page--vertical">
       <Navbar items={items}/>
-      <Filter filtrar={(ser) => this.filtrarSerie(ser)} seccion={"Series"}/>
+      <Filter Link to="/RBusquedaS" filtrar={(ser) => this.filtrarSerie(ser)} seccion={"Series"}/>
       <h3>Premiadas</h3>
       <Series datos={this.state.sT} vertical />
       <div className="load-more">

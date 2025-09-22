@@ -41,20 +41,24 @@ class MoviesR extends Component{
           
           fetch(`https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${next}&api_key=6cd60cc23958a101209d2fbbba580236`)
           .then(response => response.json())
-          .then(data => {this.setState({mR: this.state.mR.concat(data.results)})})
+          .then(data => {this.setState({mR: this.state.mR.concat(data.results), arrayBusqueda: this.state.arrayBusqueda.concat(data.results)})})
           .catch(error => console.log(error))
   }
 
   filtrarMovie(peli){
-        let movie = this.state.mR.filter(movie => movie.title.toLowerCase().includes(peli))
-        this.setState({arrayBusqueda: movie})
+    console.log(peli);
+    
+        let movie = this.state.arrayBusqueda.filter(movie => movie.title.toLowerCase().includes(peli))
+        console.log(movie);
+        
+        this.setState({mR: movie})
     }
 
   render() {
     return (
     <div className="page--vertical">
       <Navbar items={items}/>
-      <Filter filtrar={(peli) => this.filtrarMovie(peli)} seccion={"Peliculas"}/>
+      <Filter Link to="/RBusquedaM" filtrar={(peli) => this.filtrarMovie(peli)} seccion={"Peliculas"}/>
       <h3>Nuestra seleccion de peliculas para ti</h3>
       <Movies datos={this.state.mR} vertical/>
       <div className="load-more">

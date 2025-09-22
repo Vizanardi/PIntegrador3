@@ -35,21 +35,42 @@ class UnaSerie extends Component{
 
   render(){
     const s = this.state.serie
+
+    if (s === null) {
+      return (
+        <React.Fragment>
+          <Navbar items={items}/>
+          <h1>Más Info</h1>
+          <p>Cargando...</p>
+        </React.Fragment>
+      );
+    }
+
+    let generos = "No disponible";
+    if (s.genres && s.genres.length > 0) {
+      generos = "";
+      for (let i = 0; i < s.genres.length; i++) {
+        generos += s.genres[i].name;
+        if (i < s.genres.length - 1) {
+          generos += ", ";
+        }
+      }
+    }
+
     return (
     <React.Fragment>
       <Navbar items={items}/>
       <h1>Más Info</h1>
-      {s?(<SDetalle
+      <SDetalle
                 key={s.id}
                 id={s.id}
                 imagen={s.backdrop_path}
                 nombre={s.name}
                 descripcion = {s.overview}
                 calificacion = {s.vote_average}
-                genero= {s.genres.name}
+                genero= {generos}
                 fecha= {s.first_air_date}
-              />):
-              (<p>Cargando...</p>)}
+              />
     </React.Fragment>
               
   )};

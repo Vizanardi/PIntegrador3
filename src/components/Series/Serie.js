@@ -9,7 +9,22 @@ class Serie extends Component {
          valor: props.value,
          verMas: false,
          textoBotton: "Ver descripcion",
+         enFavs: false
         }}
+
+        componentDidMount() {
+          let seriesFavs = localStorage.getItem("seriesFavoritas");
+          let arraySeries = JSON.parse(seriesFavs);
+
+          if (arraySeries !== null) {
+            if (arraySeries.includes(this.props.id)) {
+              this.setState({
+                enFavs: true
+              })
+            }
+          }
+        }
+    
 
     verMas(){
     if (this.state.verMas === false){
@@ -40,8 +55,8 @@ class Serie extends Component {
       let favs= localStorage.getItem("seriesFavoritas")
       if(favs !== null){
         let parciado = JSON.parse(favs)
-        parciado.filter(id => id !== this.props.id)
-        let stringParciado = JSON.stringify(parciado)
+        let actualizado = parciado.filter(id => id !== this.props.id)
+        let stringParciado = JSON.stringify(actualizado)
         localStorage.setItem("seriesFavoritas", stringParciado)
         this.setState({enFavs: false})
       } 

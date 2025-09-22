@@ -19,9 +19,6 @@ class Movies extends Component {
                                           imagen={carta.backdrop_path} 
                                           nombre={carta.title} 
                                           descripcion={carta.overview}
-                                          agregarFav={this.props.agregarFav}
-                                          enFavoritos={this.props.enFavoritos}
-                                          quitarFav={this.props.quitarFav}
                                         />})} 
                 </section>
         </section>       

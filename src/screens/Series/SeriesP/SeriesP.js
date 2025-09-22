@@ -54,7 +54,7 @@ class SeriesP extends Component{
     return (
     <div>
       <Navbar items={items}/>
-      <Filter filtrar={(ser) => this.filtrarSerie(ser)} seccion={"Series"}/>
+      <Filter Link to="/RBusquedaS" filtrar={(ser) => this.filtrarSerie(ser)} seccion={"Series"}/>
       <h3>Series más populares</h3>
       <Series datos={this.state.sP} vertical />
       <div className="load-more">

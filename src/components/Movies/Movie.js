@@ -12,6 +12,20 @@ class Movie extends Component {
          enFavs: false
         }}
 
+
+        componentDidMount() {
+          let moviesFavs = localStorage.getItem("moviesFavoritas");
+          let arrayMovies = JSON.parse(moviesFavs);
+
+          if (arrayMovies !== null) {
+            if (arrayMovies.includes(this.props.id)) {
+              this.setState({
+                enFavs: true
+              })
+            }
+          }
+        }
+
     verMas(){
     if (this.state.verMas === false){
       this.setState({verMas: true, textoBotton: "Ver menos"})
@@ -49,6 +63,7 @@ class Movie extends Component {
     }
 
   render(){
+  
     return (
       <article  className="card">
             <Link to={`/Movies/id/${this.props.id}`}>
