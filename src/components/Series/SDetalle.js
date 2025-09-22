@@ -5,63 +5,69 @@ class SerieDetalle extends Component {
   constructor(props){
          super(props);
          this.state = {
-         valor: props.value,
          enFavs: false, 
         }}
 
-        componentDidMount() {
-          let seriesFavs = localStorage.getItem("seriesFavoritas");
-          let arraySeries = JSON.parse(seriesFavs);
+    componentDidMount() {
+      let seriesFavs = localStorage.getItem("seriesFavoritas");
+      let arraySeries = JSON.parse(seriesFavs);
 
-          if (arraySeries !== null) {
-            if (arraySeries.includes(this.props.id)) {
-              this.setState({
+      if (arraySeries !== null) {
+        if (arraySeries.includes(this.props.id)) {
+             this.setState({
                 enFavs: true
-              })
-            }
-          }
+           })
+         }
         }
+      }
 
-        agregarAFavs(){
-          let favs= localStorage.getItem("seriesFavoritas")
-          if(favs === null){
-            let favArray= []
-            favArray.push(this.props.id)
-            let stringFavs = JSON.stringify(favArray)
-            localStorage.setItem("seriesFavoritas", stringFavs)
-          }
-          else{
-            let parciado = JSON.parse(favs)
-            parciado.push(this.props.id)
-            let stringParciado = JSON.stringify(parciado)
-            localStorage.setItem("seriesFavoritas", stringParciado)
-          }
-          this.setState({ enFavs: true})
+      agregarAFavs(){
+        let favs= localStorage.getItem("seriesFavoritas")
+        if(favs === null){
+          let favArray= []
+          favArray.push(this.props.id)
+          let stringFavs = JSON.stringify(favArray)
+          localStorage.setItem("seriesFavoritas", stringFavs)
         }
+        else{
+          let parciado = JSON.parse(favs)
+          parciado.push(this.props.id)
+          let stringParciado = JSON.stringify(parciado)
+          localStorage.setItem("seriesFavoritas", stringParciado)
+        }
+        this.setState({ enFavs: true})
+      }
     
-        quitarFavs(){
-          let favs= localStorage.getItem("seriesFavoritas")
-          if(favs !== null){
-            let parciado = JSON.parse(favs)
-            let actualizado = parciado.filter(id => id !== this.props.id)
-            let stringParciado = JSON.stringify(actualizado)
-            localStorage.setItem("seriesFavoritas", stringParciado)
-            this.setState({enFavs: false})
-          } 
+      quitarFavs(){
+        let favs= localStorage.getItem("seriesFavoritas")
+        if(favs !== null){
+          let parciado = JSON.parse(favs)
+          let actualizado = parciado.filter(id => id !== this.props.id)
+          let stringParciado = JSON.stringify(actualizado)
+          localStorage.setItem("seriesFavoritas", stringParciado)
+          this.setState({enFavs: false})
         } 
+      } 
 
   render(){
     return (
-      <article className = "card">
+      <section className = "detail-card">
+        <div className="poster">
             <img src={`https://image.tmdb.org/t/p/w500${this.props.imagen}`} alt={this.props.nombre} />
-              <h2>{this.props.nombre}</h2>
-              <p>Trama: {this.props.descripcion}</p>
-              <p>Rating: {this.props.calificacion}</p>
-              <p>Fecha de estreno: {this.props.fecha}</p>
-              <p>Genero: {this.props.genero}</p>
-              {this.state.enFavs ? <button onClick={() => this.quitarFavs()} >Quitar de Favoritos</button> : <button onClick={() => this.agregarAFavs()}>Agregar a Favoritos</button>}
-
-    </article>     
+        </div>
+        <div className="info">
+          <h2 className='title'>{this.props.nombre}</h2>
+          <div className="meta">
+            <p className='desc'>{this.props.descripcion}</p>
+            <p>Rating: {this.props.calificacion}</p>
+            <p>Fecha de estreno: {this.props.fecha}</p>
+            <p>Genero: {this.props.genero}</p>
+          </div>
+          <div className="actions">
+            {this.state.enFavs ? <button onClick={() => this.quitarFavs()} >Quitar de Favoritos</button> : <button onClick={() => this.agregarAFavs()}>Agregar a Favoritos</button>}
+          </div>
+        </div>
+      </section>
     );
   };
 }

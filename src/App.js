@@ -12,12 +12,8 @@ import SeriesT from "./screens/Series/SeriesT/SeriesT";
 import UnaSerie from "./screens/UnaSerie/UnaSerie";
 import RBusquedaS from "./screens/RBusqueda/RBusquedaS";
 import RBusquedaM from "./screens/RBusqueda/RBusquedaM";
-
 import Footer from './components/Footer/Footer';
-
 import {Route, Switch} from "react-router-dom";
-
-let items = [{pagina:"Home", direccion:"/"}, {pagina:"Popular Movies", direccion:"/MoviesP"}, {pagina:"TopRated Movies", direccion:"/MoviesR"}, {pagina:"UpComing Movies", direccion:"/MoviesU"}, {pagina: "Popular Series", direccion:"/SeriesP"}, {pagina: "TopRated Series", direccion:"/SeriesT"}, {pagina: "Favoritas", direccion:"/Favorites"}];
 
 function App() {
   return (

@@ -45,12 +45,8 @@ class MoviesR extends Component{
           .catch(error => console.log(error))
   }
 
-  filtrarMovie(peli){
-    console.log(peli);
-    
+  filtrarMovie(peli){    
         let movie = this.state.arrayBusqueda.filter(movie => movie.title.toLowerCase().includes(peli))
-        console.log(movie);
-        
         this.setState({mR: movie})
     }
 

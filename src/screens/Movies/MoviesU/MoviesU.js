@@ -41,13 +41,13 @@ class MoviesU extends Component{
     this.setState({ page: next });
           fetch(`https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=${next}&api_key=6cd60cc23958a101209d2fbbba580236`)
           .then(response => response.json())
-          .then(data => {this.setState({mU: this.state.mU.concat(data.results)})})
+          .then(data => {this.setState({mU: this.state.mU.concat(data.results), arrayBusqueda: this.state.arrayBusqueda.concat(data.results)})})
           .catch(error => console.log(error))
   }
 
   filtrarMovie(peli){
-        let movie = this.state.mU.filter(movie => movie.title.toLowerCase().includes(peli))
-        this.setState({arrayBusqueda: movie})
+        let movie = this.state.arrayBusqueda.filter(movie => movie.title.toLowerCase().includes(peli))
+        this.setState({mU: movie})
     }
 
   render() {

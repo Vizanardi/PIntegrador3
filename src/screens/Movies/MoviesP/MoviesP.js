@@ -42,13 +42,13 @@ class MoviesP extends Component{
 
           fetch(`https://api.themoviedb.org/3/movie/popular?language=en-US&page=${next}&api_key=6cd60cc23958a101209d2fbbba580236`)
           .then(response => response.json())
-          .then(data => {this.setState({mP: this.state.mP.concat(data.results)})})
+          .then(data => {this.setState({mP: this.state.mP.concat(data.results), arrayBusqueda: this.state.arrayBusqueda.concat(data.results)})})
           .catch(error => console.log(error))
   }
 
   filtrarMovie(peli){
-        let movie = this.state.mP.filter(movie => movie.title.toLowerCase().includes(peli))
-        this.setState({arrayBusqueda: movie})
+        let movie = this.state.arrayBusqueda.filter(movie => movie.title.toLowerCase().includes(peli))
+        this.setState({mP: movie})
     }
 
   render() {

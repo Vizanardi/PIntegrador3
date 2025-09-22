@@ -6,7 +6,6 @@ class Filter extends Component {
          super(props)
          this.state = {
             busqueda: "",
-            arrayBusqueda: [],
             seccion: this.props.seccion,
          }
         }

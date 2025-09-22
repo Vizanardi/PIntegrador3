@@ -41,13 +41,13 @@ class SeriesT extends Component{
   
           fetch(`https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=${next}&api_key=6cd60cc23958a101209d2fbbba580236`)
           .then(response => response.json())
-          .then(data => {this.setState({sT: this.state.sT.concat(data.results)})})
+          .then(data => {this.setState({sT: this.state.sT.concat(data.results), arrayBusqueda: this.state.arrayBusqueda.concat(data.results)})})
           .catch(error => console.log(error))
   }
 
   filtrarSerie(ser){
-        let serie = this.state.sT.filter(serie => serie.name.toLowerCase().includes(ser))
-        this.setState({arrayBusqueda: serie})
+        let serie = this.state.arrayBusqueda.filter(serie => serie.name.toLowerCase().includes(ser))
+        this.setState({sT: serie})
     }
 
   render() {

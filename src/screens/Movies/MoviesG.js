@@ -55,37 +55,10 @@ class MoviesG extends Component{
     .catch(err => console.error(err));
   }
 
-  cargarMas(){
-      let next = this.state.page + 1;
-      this.setState({ page: next });
-
-            fetch(`https://api.themoviedb.org/3/movie/popular?language=en-US&page=${next}&api_key=6cd60cc23958a101209d2fbbba580236`)
-            .then(response => response.json())
-            .then(data => {this.setState({mP: this.state.mP.concat(data.results)})})
-            .catch(error => console.log(error))
-
-            fetch(`https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=${next}&api_key=6cd60cc23958a101209d2fbbba580236`)
-            .then(response => response.json())
-            .then(data => {this.setState({mU: this.state.mU.concat(data.results)})})
-            .catch(error => console.log(error))
-            
-            fetch(`https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${next}&api_key=6cd60cc23958a101209d2fbbba580236`)
-            .then(response => response.json())
-            .then(data => {this.setState({mR: this.state.mR.concat(data.results)})})
-            .catch(error => console.log(error))
-    }
-
-    filtrarMovie(peli){
-        let juntarArrays = this.state.mP.concat(this.state.mR, this.state.mU)
-        let movie = juntarArrays.filter(movie => movie.title.toLowerCase().includes(peli))
-        this.setState({arrayBusqueda: movie})
-    }
-
   render() {
     return (
     <React.Fragment>
       <Navbar items={items}/>
-      <Filter Link to="/RBusquedaM" filtrar={(peli) => this.filtrarMovie(peli)} seccion={"Peliculas"}/>
       <h1>Cartelera de Peliculas</h1>
       <div className="section-title">
         <h3>Peliculas mas populares en Argentina Hoy</h3>
@@ -104,10 +77,6 @@ class MoviesG extends Component{
         <Link to="/MoviesU" className="section-more">Ver mas</Link>
       </div>
       <Movies datos={this.state.mU}/>
-
-      <div className="load-more">
-        <button onClick={() => this.cargarMas()}>Mas Peliculas</button>
-      </div>
     </React.Fragment>
   );
 }

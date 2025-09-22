@@ -6,24 +6,23 @@ class Serie extends Component {
   constructor(props){
          super(props);
          this.state = {
-         valor: props.value,
          verMas: false,
          textoBotton: "Ver descripcion",
          enFavs: false
         }}
 
-        componentDidMount() {
-          let seriesFavs = localStorage.getItem("seriesFavoritas");
-          let arraySeries = JSON.parse(seriesFavs);
+    componentDidMount() {
+      let seriesFavs = localStorage.getItem("seriesFavoritas");
+      let arraySeries = JSON.parse(seriesFavs);
 
-          if (arraySeries !== null) {
-            if (arraySeries.includes(this.props.id)) {
-              this.setState({
-                enFavs: true
-              })
-            }
+      if (arraySeries !== null) {
+        if (arraySeries.includes(this.props.id)) {
+             this.setState({
+              enFavs: true
+            })
           }
         }
+      }
     
 
     verMas(){

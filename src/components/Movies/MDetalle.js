@@ -5,7 +5,6 @@ class MovieDetalle extends Component {
   constructor(props){
          super(props);
          this.state = {
-         valor: props.value,
          enFavs: false
         }}
 
@@ -52,18 +51,24 @@ class MovieDetalle extends Component {
 
   render(){
     return (
-      <article className = "card">
-              <img src={`https://image.tmdb.org/t/p/w500${this.props.imagen}`} alt={this.props.nombre} />
-              <h2>{this.props.nombre}</h2>
-              <p>Trama: {this.props.descripcion}</p>
-              <p>Rating: {this.props.calificacion}</p>
-              <p>Fecha de estreno: {this.props.fecha}</p>
-              <p>Duracion: {this.props.duracion}</p>
-              <p>Genero: {this.props.genero}</p>
-        
-
-              {this.state.enFavs ? <button onClick={() => this.quitarFavs()} >Quitar de Favoritos</button> : <button onClick={() => this.agregarAFavs()}>Agregar a Favoritos</button>}
-    </article>     
+      <section className = "detail-card">
+        <div className="poster">
+            <img src={`https://image.tmdb.org/t/p/w500${this.props.imagen}`} alt={this.props.nombre} />
+        </div>
+        <div className="info">
+          <h2 className='title'>{this.props.nombre}</h2>
+          <div className="meta">
+            <p className='desc'>{this.props.descripcion}</p>
+            <p>Rating: {this.props.calificacion}</p>
+            <p>Fecha de estreno: {this.props.fecha}</p>
+            <p>Duracion: {this.props.duracion} minutos</p>
+            <p>Genero: {this.props.genero}</p>
+          </div>
+          <div className="actions">
+            {this.state.enFavs ? <button onClick={() => this.quitarFavs()} >Quitar de Favoritos</button> : <button onClick={() => this.agregarAFavs()}>Agregar a Favoritos</button>}
+          </div>
+        </div>
+    </section>     
     );
   };
 }

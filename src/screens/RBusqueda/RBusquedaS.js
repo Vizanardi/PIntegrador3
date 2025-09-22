@@ -44,7 +44,7 @@ class RBusquedaS extends Component{
       return (
         <React.Fragment>
           <Navbar items={items}/>
-          <Filter filtrar={(ser) => this.filtrarSerie(ser)} />
+          <Filter filtrar={(ser) => this.filtrarSerie(ser)} seccion={"Series"}/>
           <h2>Resultados de Busqueda: {this.state.name}</h2>
           <Series datos={this.state.arrayBusqueda}/>
         </React.Fragment>

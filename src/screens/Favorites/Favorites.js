@@ -64,20 +64,18 @@ class Favorites extends Component {
     return (
       <React.Fragment>
         <Navbar items={items} />
-
-        <h2>Películas Favoritas</h2>
-        {this.state.movies.length === 0 ? (
+        <div className="page--vertical">
+          <h2>Películas Favoritas</h2>
+              {this.state.movies.length === 0 ? (
           <p>No tenés películas favoritas.</p>
-        ) : (
-          <Movies datos={this.state.movies} enFavoritos={true} />
-        )}
-
-        <h2>Series Favoritas</h2>
-        {this.state.series.length === 0 ? (
+               ) : (
+            <Movies datos={this.state.movies} enFavoritos={true} />)}
+          <h2>Series Favoritas</h2>
+              {this.state.series.length === 0 ? (
           <p>No tenés series favoritas.</p>
-        ) : (
-          <Series datos={this.state.series} enFavoritos={true} />
-        )}
+              ) : (
+            <Series datos={this.state.series} enFavoritos={true} />)}
+        </div>
       </React.Fragment>
     );
   }

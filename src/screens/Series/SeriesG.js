@@ -44,32 +44,10 @@ class SeriesG extends Component{
     .catch(err => console.error(err));  
   }
 
-  cargarMas(){
-    let next = this.state.page + 1;
-    this.setState({ page: next });
-
-          fetch(`https://api.themoviedb.org/3/tv/popular?language=en-US&page=${next}&api_key=6cd60cc23958a101209d2fbbba580236`)
-          .then(response => response.json())
-          .then(data => {this.setState({sP: this.state.sP.concat(data.results)})})
-          .catch(error => console.log(error))
-
-          fetch(`https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=${next}&api_key=6cd60cc23958a101209d2fbbba580236`)
-          .then(response => response.json())
-          .then(data => {this.setState({sT: this.state.sT.concat(data.results)})})
-          .catch(error => console.log(error))
-  }
-
-  filtrarSerie(ser){
-        let juntarArrays = this.state.sP.concat(this.state.sT)
-        let serie = juntarArrays.filter(serie => serie.name.toLowerCase().includes(ser))
-        this.setState({arrayBusqueda: serie})
-    }
-
   render() {
     return (
         <React.Fragment>
             <Navbar items={items}/>
-            <Link to="/RBusquedaS"><Filter filtrar={(ser) => this.filtrarSerie(ser)} seccion={"Series"}/></Link>
             <h1>Cartelera de Series</h1>
 
             <div className="section-title">
@@ -83,10 +61,6 @@ class SeriesG extends Component{
               <Link to="/SeriesT" className="section-more">Ver mas</Link>
             </div>
             <Series datos={this.state.sT}/>
-
-            <div className="load-more">
-              <button onClick={() => this.cargarMas()}>Mas Series</button>
-            </div>
         </React.Fragment>
   );
 }

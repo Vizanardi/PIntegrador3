@@ -6,25 +6,24 @@ class Movie extends Component {
   constructor(props){
          super(props);
          this.state = {
-         valor: props.value,
          verMas: false,
          textoBotton: "Ver descripcion",
          enFavs: false
         }}
 
 
-        componentDidMount() {
-          let moviesFavs = localStorage.getItem("moviesFavoritas");
-          let arrayMovies = JSON.parse(moviesFavs);
+    componentDidMount() {
+      let moviesFavs = localStorage.getItem("moviesFavoritas");
+      let arrayMovies = JSON.parse(moviesFavs);
 
-          if (arrayMovies !== null) {
-            if (arrayMovies.includes(this.props.id)) {
-              this.setState({
-                enFavs: true
-              })
-            }
+      if (arrayMovies !== null) {
+        if (arrayMovies.includes(this.props.id)) {
+            this.setState({
+              enFavs: true
+            })
           }
         }
+    }
 
     verMas(){
     if (this.state.verMas === false){

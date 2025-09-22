@@ -41,18 +41,18 @@ class SeriesP extends Component{
           
           fetch(`https://api.themoviedb.org/3/tv/popular?language=en-US&page=${next}&api_key=6cd60cc23958a101209d2fbbba580236`)
           .then(response => response.json())
-          .then(data => {this.setState({sP: this.state.sP.concat(data.results)})})
+          .then(data => {this.setState({sP: this.state.sP.concat(data.results), arrayBusqueda: this.state.arrayBusqueda.concat(data.results)})})
           .catch(error => console.log(error))
   }
 
   filtrarSerie(ser){
-        let serie = this.state.sP.filter(serie => serie.name.toLowerCase().includes(ser))
-        this.setState({arrayBusqueda: serie})
+        let serie = this.state.arrayBusqueda.filter(serie => serie.name.toLowerCase().includes(ser))
+        this.setState({sP: serie})
     }
 
   render() {
     return (
-    <div>
+    <div className="page--vertical">
       <Navbar items={items}/>
       <Filter Link to="/RBusquedaS" filtrar={(ser) => this.filtrarSerie(ser)} seccion={"Series"}/>
       <h3>Series más populares</h3>

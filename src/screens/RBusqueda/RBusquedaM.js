@@ -17,7 +17,7 @@ class RBusquedaM extends Component{
     };
   }
 
-    componentDidMount(){
+  componentDidMount(){
     const options = {
         method: 'GET',
         headers: {
@@ -47,9 +47,9 @@ class RBusquedaM extends Component{
       return (
         <React.Fragment>
           <Navbar items={items}/>
-          <Filter filtrar={(mov) => this.filtrarMovie(mov)} />
+          <Filter filtrar={(mov) => this.filtrarMovie(mov)} seccion={"Peliculas"}/>
           <h2>Resultados de Busqueda: {this.state.title}</h2>
-          <Movies datos={this.state.arrayBusqueda}/>
+          <Movies datos={this.state.arrayBusqueda} vertical/>
         </React.Fragment>
       ) }
 };
